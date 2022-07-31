@@ -1,0 +1,61 @@
+.categories-item{
+    position: relative;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    &:nth-child(1){
+        margin-top: 22px;
+    }
+    &__icon{
+        color: #282846;
+        font-size: 18px;
+        pointer-events: none;
+    }
+    &__name{
+        margin-left: 10px;
+        pointer-events: none;
+        color: $mainText;
+        user-select: none;
+    }
+    &__btn-icon{
+        color: $mainColor;
+        font-size: 18px;
+        transition: all 0.3s ease-in-out;
+        pointer-events: none;
+    }
+    &__btn{
+        margin-top: 30px;
+        display: flex;
+        align-items: center;
+        background-color: inherit;
+        h3{
+            margin-left: 10px;
+            color: $mainColor;
+            transition: all 0.2s ease-in-out;
+            user-select: none;
+        }
+        &:hover{
+            h3{
+                color: #1d6e6c;
+            }
+            .categories-item__btn-icon{
+                color: #1d6e6c;
+            }
+        }
+    }
+}
+
+.target{
+    &::after{
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 30px;
+        background-color: $mainColor;
+        border-radius: 12px 0px 0px 12px;
+    }
+}

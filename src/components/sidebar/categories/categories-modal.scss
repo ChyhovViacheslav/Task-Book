@@ -1,0 +1,149 @@
+.modal{
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    &__body{
+        width: 700px;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: white;
+    }
+    &__form{
+        p{
+            font-family: 'Nunito';
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 19px;
+            color: $mainText;
+        }
+    }
+    &__inputs{
+        margin-top: 30px;
+        display: flex;
+        input{
+            font-family: 'Nunito';
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 19px;
+            color: black;
+            padding: 8px 15px;
+            border-radius: 8px;
+            width: 100%;
+            transition: all 0.3s ease-in-out;
+        }
+        .cat-input{
+            border: 1px solid rgba(40, 40, 70, 0.1);
+        }
+        i{
+            position: relative;
+            margin-left: 10px;
+            &:nth-child(1){
+                margin-left: 0px;
+            }
+            &::before{
+                position: absolute;
+                transform: translate(-50%, -50%);
+                top: 50%;
+                left: 50%;
+                font-size: 26px;
+                pointer-events: none;
+            }
+            input{
+                -webkit-appearance: none;
+                appearance: none;
+                width: 37px;
+                height: 100%;
+                &:checked{
+                    background-color: $mainColor;
+                }
+            }
+        }
+    }
+    &__text{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        input{
+            margin-top: 10px;
+        }
+        .warning{
+            position: absolute;
+            transition: all 0.3s ease-in-out;
+            bottom: -20px;
+            opacity: 0;
+            margin-top: 10px;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 120%;
+            color: $colorRed;
+            margin-left: 15px;
+            &::before{
+                content: url(../../../assets/icons/triangle-exclamation-solid.svg);
+                position: absolute;
+                top: 0;
+                left: -15px;
+                height: 100%;
+                width: 10px;
+            }
+        }
+    }
+    &__ico{
+        display: flex;
+        flex-direction: column;
+        margin-left: 30px;
+    }
+    &__ico-body{
+        margin-top: 10px;
+        display: flex;
+        height: 100%;
+        input{
+            padding: 0px;
+            width: auto;
+            height: 100%;
+        }
+    }
+    &__btns{
+        display: flex;
+        justify-content: space-between;
+        margin-top: 50px;
+        button{
+            border-radius: 8px;
+            font-family: 'Nunito';
+            font-weight: 600;
+            line-height: 22px;
+            color: #fafafa;
+            padding: 10px 25px;
+        }
+    }
+
+    &__btn-cnsl{
+        background-color: $colorRed;
+        transition: all 0.2s ease-in-out;
+        &:hover{
+            background-color: #a53a3a;
+        }
+    }
+
+    &__btn-sbmt{
+        background-color: $mainColor;
+        transition: all 0.2s ease-in-out;
+        &:hover{
+            background-color: #1b7471;
+        }
+    }
+}
+
+.modal.active{
+    opacity: 1;
+    pointer-events: all;
+}
