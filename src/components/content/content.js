@@ -58,7 +58,8 @@ export default function Content(){
                 setCategory={setCategory}
                 setNewTask={setNewTask} 
                 active={active}
-                setActive={setActive}/>
+                setActive={setActive}
+            />
         </section>
     )
 }

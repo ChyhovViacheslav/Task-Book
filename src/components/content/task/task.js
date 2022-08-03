@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import '../../../styles/global.scss'
 
 export default function TaskList({newTask}){
-    useEffect(() => {
+       useEffect(() => {
         if(newTask.length > 4){
             document.querySelector('.task__active').style = 'overflow-y: scroll';
             document.querySelectorAll('.task__active-item').forEach(el => {
@@ -18,7 +18,7 @@ export default function TaskList({newTask}){
 
     const showTask = newTask.map(item => {
         const {category, task} = item
-        if('Работа' === category){
+        if('Дом' === category){
             return(
                 <div key={task} className='task__active-item'>
                     <input type="checkbox"/>

@@ -45,16 +45,8 @@ export default function Sidebar(){
             <div
                 key={name}
                 className={index === 0 ? "categories-item target" : "categories-item"}
-                onClick={(e) => {
-                    if(e.target.className === 'categories-item' || e.target.className === 'categories-item target'){
-                        const index = categories.findIndex((el, i) => {
-                            if(el.name === name){
-                                return true
-                            }
-                        })
-                        toggleTarget(index)
-                    }
-            }}>
+                onClick={() => toggleTarget(index)
+            }>
                 <FontAwesomeIcon icon={icon} className='categories-item__icon'/>
                 <h3 className="categories-item__name">{name}</h3>
             </div>
@@ -84,9 +76,9 @@ export default function Sidebar(){
                         setActive={setModalActive} 
                         changeInput={changeInput}
                         addCategories={addCategories}
-                        />
-                        </div>
-                    </div>
+                    />
+                </div>
+            </div>
         </section>
     )
 }
