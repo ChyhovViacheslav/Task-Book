@@ -5,12 +5,21 @@ import { TextField } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
-export default function TaskModal ({active, setActive}){
+export default function TaskModal ({addTask, active, setActive, setTask, setCategory}){
     const [value, setValue] = useState(Date.now());
 
     const handleChange = (newValue) => {
         setValue(newValue)
     }
+
+    const setDefault = () => {
+        inputs.value = ''
+        inputs.style.border = '1px solid rgba(40, 40, 70, 0.1)'
+        document.querySelector('.task-modal__select')
+        setActive(false)
+    }
+
+    const inputs = document.querySelector('.task-modal__input')
 
     const categoriesName = JSON.parse(localStorage.getItem('categories')).map((item, index) => {
         const {name} = item
@@ -20,23 +29,36 @@ export default function TaskModal ({active, setActive}){
     })
 
     return (
-        <div className={active ? 'task-modal active' : 'task-modal'} onClick={() => {
-            setActive(false)
-        }}>
+        <div className={active ? 'task-modal active' : 'task-modal'} onClick={() => setDefault()}>
             <div className='task-modal__body' onClick={(e) => e.stopPropagation()}>
                 <form className='task-modal__form'>
                     <h4>Добавить новую задачу</h4>
                     <div className='task-modal__inputs'>
                         <div className='task-modal__task'>
                             <p>Что нужно сделать?</p>
-                            <input type='text'/>
+                            <input
+                                className='task-modal__input' 
+                                onChange={e =>{ 
+                                    setTask(e.target.value)
+                                    if(e.target.value.length >= 50){
+                                        e.target.style.border = '1px solid red'
+                                    } else{
+                                        e.target.style.border = '1px solid rgba(40, 40, 70, 0.1)'
+                                    }
+                                }}
+                                type='text'/>
                         </div>
                         <div className='task-modal__categories'>
                             <div className='task-modal__category-item'>
                                 <p>Категория</p>
-                                <select defaultValue='DEF' className='task-modal__select'>
-                                    <option value='DEF' hidden>Выбрать</option>
-                                    {categoriesName}
+                                <select 
+                                    className='task-modal__select'
+                                    defaultValue='DEF'
+                                    onChange={(e) => {
+                                        setCategory(e.target.selectedOptions[0].text)
+                                        }}>
+                                        <option value='DEF' hidden>Выбрать</option>
+                                        {categoriesName}
                                 </select>
                             </div>
                             <div className='task-modal__category-item'>
@@ -63,16 +85,18 @@ export default function TaskModal ({active, setActive}){
                         <button
                             onClick={(e) => {
                                 e.preventDefault()
-                                setActive(false)
+                                setDefault()
                             }} 
                             className='task-modal__btn-cnsl'>
                                 Отменить
                         </button>
-                        <button
+                        <button 
+                            className='task-modal__btn-sbmt'
                             onClick={(e) => {
                                 e.preventDefault()
-                            }} 
-                            className='task-modal__btn-sbmt'>
+                                addTask()
+                                setDefault()
+                            }}>
                                 Добавить
                         </button>
                     </div>

@@ -3,27 +3,25 @@ import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import ProgressBar from './progress/progress'
 import '../../styles/global.scss'
 import TaskList from './task/task'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import TaskModal from './taskmodal'
+import { useLocalStorage } from '../services/services'
 
 export default function Content(){
     const [active, setActive] = useState(false)
+    let [task, setTask] = useState('')
+    const [category, setCategory] = useState('')
+    const [newTask, setNewTask] = useLocalStorage('tasks', [{category: 'Дом', task: 'Приготовить ужин'}])
     const [tabs, changeTabs] = useState([])
 
-    const filterTasks = (tasks) => {
-        tasks.map(item => {
-            const {text} = item
-            return (
-                <div key={text} className='task__active-item'>
-                    <input type="checkbox"/>
-                    <span>{text}</span>
-                    <button onClick={() => {
+    const addTask = () => {
+        if(task.length > 49){
+            task = `${task.slice(0, 50)}...`
+        }
 
-                    }}>
-                    </button>
-                </div>
-            )
-        })
+        const newArr = {category: category, task: task}
+
+        setNewTask([...newTask, newArr])
     }
 
     return(
@@ -45,13 +43,20 @@ export default function Content(){
                 </div>
                 <div className='content__tasks'>
                     <ProgressBar/>
-                    <TaskList filterTasks={filterTasks}/>
+                    <TaskList
+                        newTask={newTask}/>
                 </div>
                 <div className='content__inf'>
 
                 </div>
             </div>
-            <TaskModal 
+            <TaskModal
+                addTask={addTask}
+                task={task}
+                category={category}
+                setTask={setTask}
+                setCategory={setCategory}
+                setNewTask={setNewTask} 
                 active={active}
                 setActive={setActive}/>
         </section>

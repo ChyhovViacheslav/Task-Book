@@ -14,7 +14,7 @@ export default function CategoriesModal({active, setActive, changeInput, addCate
     return(
         <div className={active ? 'modal active':'modal'} onClick={() => setDeafault()}>
             <div className='modal__body' onClick={e => e.stopPropagation()}>
-                <form className='modal__form'>
+                <form className='modal__form' id='1'>
                     <h4>Добавить новую категорию</h4>
                     <div className='modal__inputs'>
                         <div className='modal__text'>

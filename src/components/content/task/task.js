@@ -1,13 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import '../../../styles/global.scss'
-import { useLocalStorage } from '../../services/services'
 
-export default function TaskList({filterTasks}){
-    // const [tasks, changeTasks] = useLocalStorage('tasks', [{text: 'Privet'}, {text: 'Poka'}, {text: 'Zdarova'}, {text: 'Kak dela'}, {text: 'norm'}])
-    const [tasks, changeTasks] = useState([{text: 'Privet'}])
-
+export default function TaskList({newTask}){
     useEffect(() => {
-        if(tasks.length > 4){
+        if(newTask.length > 4){
             document.querySelector('.task__active').style = 'overflow-y: scroll';
             document.querySelectorAll('.task__active-item').forEach(el => {
                 el.style = 'margin-right: 8px'
@@ -18,33 +14,21 @@ export default function TaskList({filterTasks}){
                 el.style = 'margin-right: 0px'
             })
         }
-      return () => {
-      }
-    }, [tasks])
+    }, [newTask])
 
-    const deleteTask = (id) => {
-        // const index = data.findIndex(elem => elem.id === id)
-        //     const before = data.slice(0, index)
-        //     const after = data.slice(index + 1)
+    const showTask = newTask.map(item => {
+        const {category, task} = item
+        if('Работа' === category){
+            return(
+                <div key={task} className='task__active-item'>
+                    <input type="checkbox"/>
+                    <span>{task}</span>
+                    <button onClick={() => {
 
-        //     const newArr = [...before, ...after]
-
-        //     return{
-        //         data: newArr
-        //     }
-    }
-
-    const activeTask = tasks.map(item => {
-        const {text} = item
-        return (
-            <div key={text} className='task__active-item'>
-                <input type="checkbox"/>
-                <span>{text}</span>
-                <button onClick={() => {
-
-                }}></button>
-            </div>
-        )
+                    }}></button>
+                </div>
+            )
+        }
     })
 
     return(
@@ -57,7 +41,7 @@ export default function TaskList({filterTasks}){
                     </div>
                 </div>
                 <div className='task__active'>
-                    {activeTask}
+                    {showTask}
                 </div>
                 <div className='task__completed'></div>
             </div>
