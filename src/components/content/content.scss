@@ -2,6 +2,7 @@
     width: 100%;
     &__body{
         display: grid;
+        grid-template-columns: 565px 470px;
         column-gap: 30px;
         row-gap: 30px;
         padding: 20px 70px 0px 70px;

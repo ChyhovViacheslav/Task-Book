@@ -6,6 +6,10 @@ import TaskList from './task/task'
 import { useState, useRef, useEffect } from 'react'
 import TaskModal from './taskmodal'
 import { useLocalStorage } from '../services/services'
+import Timer from './timer/timer'
+import Remark from './remark/remark'
+import Facts from './facts/facts'
+import Chart from './chart/chart'
 
 export default function Content(){
     const [active, setActive] = useState(false)
@@ -47,7 +51,10 @@ export default function Content(){
                         newTask={newTask}/>
                 </div>
                 <div className='content__inf'>
-
+                    <Timer/>
+                    <Remark/>
+                    <Facts/>
+                    <Chart/>
                 </div>
             </div>
             <TaskModal
