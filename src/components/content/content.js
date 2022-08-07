@@ -11,7 +11,7 @@ import Remark from './remark/remark'
 import Facts from './facts/facts'
 import Chart from './chart/chart'
 
-export default function Content({target}){
+export default function Content({target,setTarget, categories, changeCategories, toggleTarget}){
     const [active, setActive] = useState(false)
     let [task, setTask] = useState('')
     const [category, setCategory] = useState('')
@@ -62,6 +62,20 @@ export default function Content({target}){
                         target={target}
                         newTask={newTask}
                         setNewTask={setNewTask}/>
+                    <button 
+                        className='content__delete-btn'
+                        onClick={() => {
+                            setNewTask(newTask.filter(item => {
+                                return item.category !== target
+                            }))
+                            changeCategories(categories.filter(item => {
+                                return item.name !== target
+                            }))
+                            setTarget(categories[0].name)
+                            toggleTarget(0)
+                        }}>
+                        <span>Удалить категорию {target}</span>
+                    </button>
                 </div>
                 <div className='content__inf'>
                     <Timer/>

@@ -1,14 +1,12 @@
 import '../../styles/global.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClipboardList } from '@fortawesome/free-solid-svg-icons'
-import { useRef, useEffect, useState, createRef } from 'react'
+import { useEffect, useState } from 'react'
 import { faCirclePlus, faHouse } from "@fortawesome/free-solid-svg-icons"
-import { useLocalStorage } from '../services/services'
 import CategoriesModal from "./categories/categories-modal"
 
-export default function Sidebar({setTarget}){
+export default function Sidebar({setTarget, categories, changeCategories, toggleTarget}){
     const [modalActive, setModalActive] = useState(false)
-    const [categories, changeCategories] = useLocalStorage('categories', [{icon: faHouse, name: 'Дом'}])
     let [input, changeInput] = useState('')
 
     useEffect(() => {
@@ -29,14 +27,6 @@ export default function Sidebar({setTarget}){
         } else{
             changeCategories([...categories, newArr])
         }
-    }
-
-    const toggleTarget = (index) => {
-        document.querySelectorAll('.categories-item').forEach((el) => {
-            el.classList.remove('target')
-        })
-        
-        document.querySelectorAll('.categories-item')[index].classList.add('target')
     }
 
     const content = categories.map((item, index) => {

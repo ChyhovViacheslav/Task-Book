@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import '../../../styles/global.scss'
 
 export default function TaskList({newTask, target, setNewTask, decTask, deletedTask, complitedTaskN, countTask}){
@@ -7,7 +6,7 @@ export default function TaskList({newTask, target, setNewTask, decTask, deletedT
         const {category, task, complited, id} = item
         if(target === category && !complited){
             return(
-                <div key={task} className='task__active-item'>
+                <div key={id} className='task__active-item'>
                     <input 
                         className='task__input' 
                         type="checkbox"
@@ -37,7 +36,7 @@ export default function TaskList({newTask, target, setNewTask, decTask, deletedT
         const {category, task, complited, id} = item
         if(target === category && complited){
             return(
-                <div key={task} className='task__active-item'>
+                <div key={id} className='task__active-item'>
                     <input 
                         className='task__input' 
                         type="checkbox"
@@ -73,6 +72,10 @@ export default function TaskList({newTask, target, setNewTask, decTask, deletedT
                     </div>
                 </div>
                 <div className='task__active'>
+                    {/* {activeTask.length > 1 ? activeTask : 
+                    <div className='task__active-empty'>
+                        <span>Вы пока не создали каких-либо задач в данной категории</span>
+                    </div>} */}
                     {activeTask}
                 </div>
                 <div className='task__complited-title'>

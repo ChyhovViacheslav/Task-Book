@@ -1,6 +1,6 @@
 import '../../styles/global.scss'
 import { DateTimePicker } from '@mui/x-date-pickers'
-import { useRef, useState, useEffect } from 'react';
+import { useState } from 'react';
 import { TextField } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
