@@ -3,7 +3,7 @@ import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import ProgressBar from './progress/progress'
 import '../../styles/global.scss'
 import TaskList from './task/task'
-import { useState, useRef, useEffect } from 'react'
+import { useState } from 'react'
 import TaskModal from './taskmodal'
 import { useLocalStorage } from '../services/services'
 import Timer from './timer/timer'
@@ -11,19 +11,22 @@ import Remark from './remark/remark'
 import Facts from './facts/facts'
 import Chart from './chart/chart'
 
-export default function Content(){
+export default function Content({target}){
     const [active, setActive] = useState(false)
     let [task, setTask] = useState('')
     const [category, setCategory] = useState('')
-    const [newTask, setNewTask] = useLocalStorage('tasks', [{category: 'Дом', task: 'Приготовить ужин'}])
-    const [tabs, changeTabs] = useState([])
+    const [newTask, setNewTask] = useLocalStorage('tasks', [])
+    const [createdTask, incTask] = useLocalStorage('createdTask', 0)
+    const [deletedTask, decTask] = useLocalStorage('deletedTask', 0)
+    const [complitedTask, countTask] = useLocalStorage('complitedTask', 0)
 
     const addTask = () => {
+        const id = Math.floor(Math.random() * 99999999999999)
         if(task.length > 49){
             task = `${task.slice(0, 50)}...`
         }
 
-        const newArr = {category: category, task: task}
+        const newArr = {id: id, category: category, task: task, complited: false}
 
         setNewTask([...newTask, newArr])
     }
@@ -46,9 +49,19 @@ export default function Content(){
                     </div>
                 </div>
                 <div className='content__tasks'>
-                    <ProgressBar/>
+                    <ProgressBar
+                        complitedTask={complitedTask}
+                        newTask={newTask}
+                        createdTask={createdTask}
+                        deletedTask={deletedTask}/>
                     <TaskList
-                        newTask={newTask}/>
+                        complitedTaskN={complitedTask}
+                        countTask={countTask}
+                        deletedTask={deletedTask}
+                        decTask={decTask}
+                        target={target}
+                        newTask={newTask}
+                        setNewTask={setNewTask}/>
                 </div>
                 <div className='content__inf'>
                     <Timer/>
@@ -58,6 +71,8 @@ export default function Content(){
                 </div>
             </div>
             <TaskModal
+                createdTask={createdTask}
+                incTask={incTask}
                 addTask={addTask}
                 task={task}
                 category={category}

@@ -1,31 +1,63 @@
 import { useEffect, useState } from 'react'
 import '../../../styles/global.scss'
 
-export default function TaskList({newTask}){
-       useEffect(() => {
-        if(newTask.length > 4){
-            document.querySelector('.task__active').style = 'overflow-y: scroll';
-            document.querySelectorAll('.task__active-item').forEach(el => {
-                el.style = 'margin-right: 8px'
-            })
-        } else{
-            document.querySelector('.task__active').style = 'overflow-y: auto';
-            document.querySelectorAll('.task__active-item').forEach(el => {
-                el.style = 'margin-right: 0px'
-            })
-        }
-    }, [newTask])
+export default function TaskList({newTask, target, setNewTask, decTask, deletedTask, complitedTaskN, countTask}){
 
-    const showTask = newTask.map(item => {
-        const {category, task} = item
-        if('Дом' === category){
+    const activeTask = newTask.map((item) => {
+        const {category, task, complited, id} = item
+        if(target === category && !complited){
             return(
                 <div key={task} className='task__active-item'>
-                    <input type="checkbox"/>
+                    <input 
+                        className='task__input' 
+                        type="checkbox"
+                        checked={false}
+                        onChange={() => {
+                            const changedTask = newTask.map((item) => {
+                                return item.id === id ? {...item, complited: !complited} : item
+                            })
+                            countTask(++complitedTaskN)
+                            setNewTask(changedTask)
+                        }}/>
                     <span>{task}</span>
-                    <button onClick={() => {
+                    <button className='task__trash' onClick={() => {
+                        const changedTask = newTask.filter((item) => {
+                            return item.id !== id
+                        })
+                        setNewTask(changedTask)
+                        decTask(++deletedTask)
+                    }}>
+                    </button>
+                </div>
+            )
+        }
+    })
 
-                    }}></button>
+    const complitedTask = newTask.map((item) => {
+        const {category, task, complited, id} = item
+        if(target === category && complited){
+            return(
+                <div key={task} className='task__active-item'>
+                    <input 
+                        className='task__input' 
+                        type="checkbox"
+                        checked={true}
+                        onChange={() => {
+                            const changedTask = newTask.map((item) => {
+                                return item.id === id ? {...item, complited: !complited} : item
+                            })
+                            countTask(--complitedTaskN)
+                            setNewTask(changedTask)
+                        }}/>
+                    <span style={{textDecoration: 'line-through'}}>{task}</span>
+                    <button className='task__trash' onClick={() => {
+                        const changedTask = newTask.filter((item) => {
+                            return item.id !== id
+                        })
+                        setNewTask(changedTask)
+                        decTask(++deletedTask)
+                    }}>
+                    </button>
                 </div>
             )
         }
@@ -41,9 +73,14 @@ export default function TaskList({newTask}){
                     </div>
                 </div>
                 <div className='task__active'>
-                    {showTask}
+                    {activeTask}
                 </div>
-                <div className='task__completed'></div>
+                <div className='task__complited-title'>
+                    <h1>Завершенные задачи</h1>
+                </div>
+                <div className='task__completed'>
+                    {complitedTask}
+                </div>
             </div>
         </div>
     )

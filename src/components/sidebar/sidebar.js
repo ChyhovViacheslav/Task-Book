@@ -6,7 +6,7 @@ import { faCirclePlus, faHouse } from "@fortawesome/free-solid-svg-icons"
 import { useLocalStorage } from '../services/services'
 import CategoriesModal from "./categories/categories-modal"
 
-export default function Sidebar(){
+export default function Sidebar({setTarget}){
     const [modalActive, setModalActive] = useState(false)
     const [categories, changeCategories] = useLocalStorage('categories', [{icon: faHouse, name: 'Дом'}])
     let [input, changeInput] = useState('')
@@ -20,7 +20,7 @@ export default function Sidebar(){
             input = `${input.slice(0, 12)}...`
         }
 
-        const newArr = {icon: faHouse, name: input, target: false}
+        const newArr = {icon: faHouse, name: input}
         
         if(categories.length >= 10){
             console.log("Слишком много категорий")
@@ -45,7 +45,10 @@ export default function Sidebar(){
             <div
                 key={name}
                 className={index === 0 ? "categories-item target" : "categories-item"}
-                onClick={() => toggleTarget(index)
+                onClick={(e) => {
+                    setTarget(e.target.textContent)
+                    toggleTarget(index)
+                }
             }>
                 <FontAwesomeIcon icon={icon} className='categories-item__icon'/>
                 <h3 className="categories-item__name">{name}</h3>

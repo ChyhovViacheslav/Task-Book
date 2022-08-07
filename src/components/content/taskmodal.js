@@ -1,11 +1,11 @@
 import '../../styles/global.scss'
 import { DateTimePicker } from '@mui/x-date-pickers'
-import { useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { TextField } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
-export default function TaskModal ({addTask, active, setActive, setTask, setCategory}){
+export default function TaskModal ({addTask, active, setActive, setTask, setCategory, category, task, createdTask, incTask}){
     const [value, setValue] = useState(Date.now());
 
     const handleChange = (newValue) => {
@@ -94,8 +94,13 @@ export default function TaskModal ({addTask, active, setActive, setTask, setCate
                             className='task-modal__btn-sbmt'
                             onClick={(e) => {
                                 e.preventDefault()
-                                addTask()
-                                setDefault()
+                                if(category !== '' && task !==''){
+                                    addTask()
+                                    setDefault()
+                                    incTask(++createdTask)
+                                }else{
+                                    console.log('Пустое значение')
+                                }
                             }}>
                                 Добавить
                         </button>
