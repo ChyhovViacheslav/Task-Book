@@ -8,6 +8,7 @@
         background-color: white;
     }
     &__title{
+        position: relative;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -26,7 +27,7 @@
             border-radius: 9em;
         }
     }
-    &__active-empty{
+    .empty{
         display: flex;
         flex-direction: column;
         justify-content: center;

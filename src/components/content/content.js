@@ -53,7 +53,10 @@ export default function Content({target,setTarget, categories, changeCategories,
                         complitedTask={complitedTask}
                         newTask={newTask}
                         createdTask={createdTask}
-                        deletedTask={deletedTask}/>
+                        deletedTask={deletedTask}
+                        incTask={incTask}
+                        decTask={decTask}
+                        countTask={countTask}/>
                     <TaskList
                         complitedTaskN={complitedTask}
                         countTask={countTask}

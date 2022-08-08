@@ -53,6 +53,14 @@ h4{
     color: $mainColor;
     font-weight: 700;
 }
+h5{
+    font-family: 'Nunito';
+    font-size: 12px;
+    line-height: 16px;
+    color: $mainText;
+    font-weight: 600;
+    letter-spacing: 2%;
+}
 //<ОБНУЛЯЮЩИЙ СПИСОК>==================================================================
 
 
@@ -99,6 +107,7 @@ h4{
 @import "../components/content/remark/remark.scss";
 @import "../components/content/facts/facts.scss";
 @import "../components/content/chart/chart.scss";
+@import "../components/interface/dots/dots.scss";
 //<ФАЙЛЫ СТИЛЕЙ СТРАНИЦ И ЭЛЕМЕНТОВ>================================================================================
 
 //<ОСНОВНОЙ БЛОК>================================================================================
