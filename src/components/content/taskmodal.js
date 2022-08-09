@@ -16,6 +16,7 @@ export default function TaskModal ({addTask, active, setActive, setTask, setCate
         inputs.value = ''
         inputs.style.border = '1px solid rgba(40, 40, 70, 0.1)'
         document.querySelector('.task-modal__select')
+        document.querySelector('.warning-task').style.opacity = '0'
         setActive(false)
     }
 
@@ -42,11 +43,14 @@ export default function TaskModal ({addTask, active, setActive, setTask, setCate
                                     setTask(e.target.value)
                                     if(e.target.value.length >= 50){
                                         e.target.style.border = '1px solid red'
+                                        document.querySelector('.warning-task').style.opacity = '1'
                                     } else{
                                         e.target.style.border = '1px solid rgba(40, 40, 70, 0.1)'
+                                        document.querySelector('.warning-task').style.opacity = '0'
                                     }
                                 }}
                                 type='text'/>
+                            <p className='warning-task'>Слишком длинное название задачи</p>
                         </div>
                         <div className='task-modal__categories'>
                             <div className='task-modal__category-item'>

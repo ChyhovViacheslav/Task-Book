@@ -11,6 +11,7 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s;
+    z-index: 999;
     &__body{
         width: 700px;
         padding: 20px;

@@ -1,39 +1,10 @@
 import { useState } from 'react'
 import '../../../styles/global.scss'
 import DotsModal from '../../interface/dots/dots'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 export default function TaskList({newTask, target, setNewTask, decTask, deletedTask, complitedTaskN, countTask}){
     const [active, setActive] = useState(false)
-
-    const activeTask = newTask.map((item) => {
-        const {category, task, complited, id} = item
-        if(target === category && !complited){
-            return(
-                <div key={id} className='task__active-item'>
-                    <input 
-                        className='task__input' 
-                        type="checkbox"
-                        checked={false}
-                        onChange={() => {
-                            const changedTask = newTask.map((item) => {
-                                return item.id === id ? {...item, complited: !complited} : item
-                            })
-                            countTask(++complitedTaskN)
-                            setNewTask(changedTask)
-                        }}/>
-                    <span>{task}</span>
-                    <button className='task__trash' onClick={() => {
-                        const changedTask = newTask.filter((item) => {
-                            return item.id !== id
-                        })
-                        setNewTask(changedTask)
-                        decTask(++deletedTask)
-                    }}>
-                    </button>
-                </div>
-            )
-        }
-    })
 
     const complitedTask = newTask.map((item) => {
         const {category, task, complited, id} = item
@@ -101,10 +72,49 @@ export default function TaskList({newTask, target, setNewTask, decTask, deletedT
                         />
                 </div>
                 <div className='task__active'>
-                    {emptyTask.length > 0 ? activeTask : 
-                    <div className='task__active-empty empty'>
-                        <span>Нет активных задач</span>
-                    </div>}
+                    {emptyTask.length > 0 ? (
+                        <TransitionGroup className='task__group'>
+                        {newTask.map((item) => {
+                            const {category, task, complited, id} = item
+                            if(target === category && !complited){
+                                return(
+                                    <CSSTransition 
+                                        classNames='item' key={id}
+                                        timeout={300}>
+                                        <div key={id} className='task__active-item'>
+                                        <input 
+                                            className='task__input' 
+                                            type="checkbox"
+                                            checked={false}
+                                            onChange={() => {
+                                                const changedTask = newTask.map((item) => {
+                                                    return item.id === id ? {...item, complited: !complited} : item
+                                                })
+                                                countTask(++complitedTaskN)
+                                                setNewTask(changedTask)
+                                            }}/>
+                                        <span>{task}</span>
+                                        <button className='task__trash' onClick={() => {
+                                            const changedTask = newTask.filter((item) => {
+                                                return item.id !== id
+                                            })
+                                            setNewTask(changedTask)
+                                            decTask(++deletedTask)
+                                        }}>
+                                        </button>
+                                        </div>
+                                    </CSSTransition>
+                                )
+                            }
+                        })}
+                    </TransitionGroup>
+                    ) : (
+                        <CSSTransition classNames='block' timeout={300}>
+                            <div className='task__active-empty empty'>
+                                <span>Нет активных задач</span>
+                            </div>
+                        </CSSTransition>
+                    )}
                 </div>
                 <div className='task__complited-title'>
                     <h1>Завершенные задачи</h1>

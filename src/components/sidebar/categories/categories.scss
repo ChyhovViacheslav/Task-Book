@@ -18,6 +18,7 @@
         pointer-events: none;
         color: $mainText;
         user-select: none;
+        transition: margin-left 0.3s ease-in-out;
     }
     &__btn-icon{
         color: $mainColor;
@@ -45,17 +46,28 @@
             }
         }
     }
-}
-
-.target{
+    &:hover{
+        .categories-item__name{
+            margin-left: 15px;
+        }
+    }
     &::after{
         content: '';
+        opacity: 0;
         position: absolute;
         top: 0;
-        right: 0;
+        right: -30px;
         height: 100%;
         width: 30px;
         background-color: $mainColor;
         border-radius: 12px 0px 0px 12px;
+        transition: all 0.3s ease-in-out;
+    }
+}
+
+.target{
+    &::after{
+        right: 0;
+        opacity: 1;
     }
 }

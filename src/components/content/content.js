@@ -11,7 +11,7 @@ import Remark from './remark/remark'
 import Facts from './facts/facts'
 import Chart from './chart/chart'
 
-export default function Content({target,setTarget, categories, changeCategories, toggleTarget}){
+export default function Content({target, setTarget, categories, changeCategories, toggleTarget}){
     const [active, setActive] = useState(false)
     let [task, setTask] = useState('')
     const [category, setCategory] = useState('')
