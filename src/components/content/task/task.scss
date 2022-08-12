@@ -131,22 +131,21 @@
 .item-enter {
     opacity: 0;
     margin-top: -40px;
-  }
-  .item-enter-active {
+}
+.item-enter-active {
     margin-top: 0px;
     opacity: 1;
     transition: all 300ms ease-in-out;
-  }
-  .item-exit {
+}
+.item-exit {
     margin-top: 0px;
     opacity: 1;
-  }
-  .item-exit-active {
+}
+.item-exit-active {
     margin-top: -40px;
     opacity: 0;
     transition: all 300ms ease-in-out;
-  }
-
+}
 
 .block-enter{
     opacity: 0;

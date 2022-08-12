@@ -6,8 +6,8 @@ import { useLocalStorage } from './components/services/services';
 import { faHouse } from '@fortawesome/free-solid-svg-icons';
 
 export default function App() {
-  const [categories, changeCategories] = useLocalStorage('categories', [{icon: faHouse, name: 'Дом'}])
-  const [target, setTarget] = useState('Дом')
+  const [categories, changeCategories] = useLocalStorage('categories', [{id: 12314, icon: faHouse, name: 'Дом'}])
+  const [target, setTarget] = useState()
 
   const toggleTarget = (index) => {
     document.querySelectorAll('.categories-item').forEach((el) => {
@@ -19,17 +19,19 @@ export default function App() {
 
   return (
     <main className='page'>
-      <Sidebar 
-        setTarget={setTarget}
-        categories={categories}
-        changeCategories={changeCategories}
-        toggleTarget={toggleTarget}/>
-      <Content
-        toggleTarget={toggleTarget}
-        target={target}
-        setTarget={setTarget}
-        categories={categories}
-        changeCategories={changeCategories}/>
+        <div className='page__body'>
+          <Sidebar 
+            setTarget={setTarget}
+            categories={categories}
+            changeCategories={changeCategories}
+            toggleTarget={toggleTarget}/>
+          <Content
+            toggleTarget={toggleTarget}
+            target={target}
+            setTarget={setTarget}
+            categories={categories}
+            changeCategories={changeCategories}/>
+        </div>
     </main>
   );
 }

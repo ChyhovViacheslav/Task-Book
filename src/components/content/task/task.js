@@ -3,39 +3,8 @@ import '../../../styles/global.scss'
 import DotsModal from '../../interface/dots/dots'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
-export default function TaskList({newTask, target, setNewTask, decTask, deletedTask, complitedTaskN, countTask}){
+export default function TaskList({categories, newTask, target, setNewTask, decTask, deletedTask, complitedTaskN, countTask}){
     const [active, setActive] = useState(false)
-
-    const complitedTask = newTask.map((item) => {
-        const {category, task, complited, id} = item
-        if(target === category && complited){
-            return(
-                <div key={id} className='task__active-item'>
-                    <input 
-                        className='task__input' 
-                        type="checkbox"
-                        checked={true}
-                        onChange={() => {
-                            const changedTask = newTask.map((item) => {
-                                return item.id === id ? {...item, complited: !complited} : item
-                            })
-                            countTask(--complitedTaskN)
-                            setNewTask(changedTask)
-                        }}/>
-                    <span style={{textDecoration: 'line-through'}}>{task}</span>
-                    <button className='task__trash' onClick={() => {
-                        const changedTask = newTask.filter((item) => {
-                            return item.id !== id
-                        })
-                        setNewTask(changedTask)
-                        decTask(++deletedTask)
-                        countTask(--complitedTaskN)
-                    }}>
-                    </button>
-                </div>
-            )
-        }
-    })
 
     const emptyTask = newTask.filter(item => {
         if(item.category === target){
@@ -120,10 +89,47 @@ export default function TaskList({newTask, target, setNewTask, decTask, deletedT
                     <h1>Завершенные задачи</h1>
                 </div>
                 <div className='task__completed'>
-                    {emptyComplitedTask.length > 0 ? complitedTask :
-                    <div className='task__complited-empty empty'>
-                        <span>Нет завершённых задач</span>    
-                    </div>}
+                    {emptyComplitedTask.length > 0 ? (
+                        <TransitionGroup>
+                            {newTask.map((item) => {
+                                const {category, task, complited, id} = item
+                                if(target === category && complited){
+                                    return(
+                                        <CSSTransition classNames='item' key={id}
+                                        timeout={300}>
+                                            <div key={id} className='task__active-item'>
+                                                <input 
+                                                    className='task__input' 
+                                                    type="checkbox"
+                                                    checked={true}
+                                                    onChange={() => {
+                                                        const changedTask = newTask.map((item) => {
+                                                            return item.id === id ? {...item, complited: !complited} : item
+                                                        })
+                                                        countTask(--complitedTaskN)
+                                                        setNewTask(changedTask)
+                                                    }}/>
+                                                <span style={{textDecoration: 'line-through'}}>{task}</span>
+                                                <button className='task__trash' onClick={() => {
+                                                    const changedTask = newTask.filter((item) => {
+                                                        return item.id !== id
+                                                    })
+                                                    setNewTask(changedTask)
+                                                    decTask(++deletedTask)
+                                                    countTask(--complitedTaskN)
+                                                }}>
+                                                </button>
+                                            </div>
+                                        </CSSTransition>
+                                    )
+                                }
+                            })}
+                        </TransitionGroup>
+                        ) : (
+                            <div className='task__complited-empty empty'>
+                                <span>Нет завершённых задач</span>    
+                            </div>
+                        )}
                 </div>
             </div>
         </div>

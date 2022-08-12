@@ -33,58 +33,63 @@ export default function Content({target, setTarget, categories, changeCategories
 
     return(
         <section className="content">
-            <div className='content__body'>
-                <div className='content__header'>
-                    <button className="content__btn" onClick={() => {
-                        setActive(true)
-                    }}>
-                        <FontAwesomeIcon className='content__btn-ico' icon={faCirclePlus}/>
-                        <span>Новая задача</span>
-                    </button>
-                    <div className='content__user'>
-                        <h3>Хорошего дня, username</h3>
-                        <div className='content__user-ico'>
-                            
+            <div className='content__container _container'>
+                <div className='content__body'>
+                    <div className='content__header'>
+                        <button className="content__btn" onClick={() => {
+                            setActive(true)
+                        }}>
+                            <FontAwesomeIcon className='content__btn-ico' icon={faCirclePlus}/>
+                            <span>Новая задача</span>
+                        </button>
+                        <div className='content__user'>
+                            <h3>Хорошего дня, username</h3>
+                            <div className='content__user-ico'>
+                                
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className='content__tasks'>
-                    <ProgressBar
-                        complitedTask={complitedTask}
-                        newTask={newTask}
-                        createdTask={createdTask}
-                        deletedTask={deletedTask}
-                        incTask={incTask}
-                        decTask={decTask}
-                        countTask={countTask}/>
-                    <TaskList
-                        complitedTaskN={complitedTask}
-                        countTask={countTask}
-                        deletedTask={deletedTask}
-                        decTask={decTask}
-                        target={target}
-                        newTask={newTask}
-                        setNewTask={setNewTask}/>
-                    <button 
-                        className='content__delete-btn'
-                        onClick={() => {
-                            setNewTask(newTask.filter(item => {
-                                return item.category !== target
-                            }))
-                            changeCategories(categories.filter(item => {
-                                return item.name !== target
-                            }))
-                            setTarget(categories[0].name)
-                            toggleTarget(0)
-                        }}>
-                        <span>Удалить категорию {target}</span>
-                    </button>
-                </div>
-                <div className='content__inf'>
-                    <Timer/>
-                    <Remark/>
-                    <Facts/>
-                    <Chart/>
+                   <div className='content__content'>
+                        <div className='content__tasks'>
+                            <ProgressBar
+                                complitedTask={complitedTask}
+                                newTask={newTask}
+                                createdTask={createdTask}
+                                deletedTask={deletedTask}
+                                incTask={incTask}
+                                decTask={decTask}
+                                countTask={countTask}/>
+                            <TaskList
+                                categories={categories}
+                                complitedTaskN={complitedTask}
+                                countTask={countTask}
+                                deletedTask={deletedTask}
+                                decTask={decTask}
+                                target={target}
+                                newTask={newTask}
+                                setNewTask={setNewTask}/>
+                            <button 
+                                className='content__delete-btn'
+                                onClick={() => {
+                                    setNewTask(newTask.filter(item => {
+                                        return item.category !== target
+                                    }))
+                                    changeCategories(categories.filter(item => {
+                                        return item.name !== target
+                                    }))
+                                    setTarget(categories[0].name)
+                                    toggleTarget(0)
+                                }}>
+                                <span>Удалить категорию {target}</span>
+                            </button>
+                        </div>
+                        <div className='content__inf'>
+                            <Timer/>
+                            <Remark/>
+                            <Facts/>
+                            <Chart/>
+                        </div>
+                   </div>
                 </div>
             </div>
             <TaskModal

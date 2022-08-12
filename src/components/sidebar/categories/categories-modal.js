@@ -1,8 +1,8 @@
 import '../../../styles/global.scss'
 
-export default function CategoriesModal({active, setActive, changeInput, addCategories}){
+export default function CategoriesModal({input, categories, active, setActive, changeInput, addCategories}){
 
-    const setDeafault = () => {
+    const setDefault = () => {
         inputs.value = ''
         inputs.style.border = '1px solid rgba(40, 40, 70, 0.1)'
         document.querySelector('.warning').style.opacity = '0'
@@ -12,7 +12,7 @@ export default function CategoriesModal({active, setActive, changeInput, addCate
     const inputs = document.querySelector('input')
 
     return(
-        <div className={active ? 'modal active':'modal'} onClick={() => setDeafault()}>
+        <div className={active ? 'modal active':'modal'} onClick={() => setDefault()}>
             <div className='modal__body' onClick={e => e.stopPropagation()}>
                 <form className='modal__form' id='1'>
                     <h4>Добавить новую категорию</h4>
@@ -50,14 +50,18 @@ export default function CategoriesModal({active, setActive, changeInput, addCate
                         <button 
                             onClick={e => {
                                 e.preventDefault()
-                                setDeafault()
+                                setDefault()
                             }} 
                             className='modal__btn-cnsl'>Отменить</button>
                         <button
                             onClick={e => {
                                 e.preventDefault()
-                                addCategories()
-                                setDeafault()
+                                if(input.length >= 12){
+                                    console.log('Слишком длинное название категории')
+                                } else {
+                                    addCategories()
+                                    setDefault()
+                                }
                             }} 
                             className='modal__btn-sbmt'>Добавить</button>
                     </div>

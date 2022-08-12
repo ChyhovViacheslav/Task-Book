@@ -97,7 +97,6 @@ h5{
 //<ФАЙЛЫ СТИЛЕЙ СТРАНИЦ И ЭЛЕМЕНТОВ>================================================================================
 @import "../App.scss";
 @import "../components/sidebar/sidebar.scss";
-@import "../components/sidebar/categories/categories.scss";
 @import "../components/sidebar/categories/categories-modal.scss";
 @import "../components/content/content.scss";
 @import "../components/content/progress/progress.scss";
@@ -113,7 +112,6 @@ h5{
 //<ОСНОВНОЙ БЛОК>================================================================================
 .page{
     display: flex;
-    flex-direction: row;
     flex: 1 1 auto;
 }
 //<ОСНОВНОЙ БЛОК>================================================================================
