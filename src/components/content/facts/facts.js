@@ -24,7 +24,7 @@ export default function Facts(){
         <div className="facts">
             <div className="facts__body">
                 <div className="facts__title">
-                    <h1>Факт дня</h1>
+                    <h1>Совет дня</h1>
                 </div>
                 <div className="facts__content">
                     <p>{facts[randomNumb]}</p>

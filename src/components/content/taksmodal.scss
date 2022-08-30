@@ -77,13 +77,26 @@
         justify-content: space-between;
     }
     &__category-item{
+        position: relative;
         width: 200px;
         p{
             margin-bottom: 10px;
         }
+        &::after{
+            content:url(../../assets/icons/chevron-down.svg);
+            position: absolute;
+            right: 15px;
+            top: 40px;
+        }
+        &:nth-child(2){
+            &::after{
+                content: none;
+            }
+        }
     }
     &__select{
         width: 100%;
+        -webkit-appearance: none;
         padding: 8px 15px;
         border-radius: 8px;
         border: 1px solid rgba(40, 40, 70, 0.1);

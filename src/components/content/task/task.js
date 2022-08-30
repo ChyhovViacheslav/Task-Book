@@ -3,7 +3,7 @@ import '../../../styles/global.scss'
 import DotsModal from '../../interface/dots/dots'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
-export default function TaskList({categories, newTask, target, setNewTask, decTask, deletedTask, complitedTaskN, countTask}){
+export default function TaskList({newTask, target, setNewTask, decTask, deletedTask, complitedTaskN, countTask}){
     const [active, setActive] = useState(false)
 
     const emptyTask = newTask.filter(item => {

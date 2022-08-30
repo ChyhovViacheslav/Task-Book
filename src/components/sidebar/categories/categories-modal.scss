@@ -106,11 +106,42 @@
     &__ico-body{
         margin-top: 10px;
         display: flex;
+        flex-direction: row;
+        align-items: center;
         height: 100%;
+        padding: 1px 10px 0px 10px;
+        border-radius: 8px;
+
         input{
+            -webkit-appearance: none;
+            appearance: none;
+            cursor: pointer;
             padding: 0px;
             width: auto;
             height: 100%;
+            &:checked + img{
+                transition: border-color 0.2s ease-in;
+                border: 2px solid;
+                border-color: #1b7471;
+            }
+        }
+        img{
+            transition: border-color 0.2s ease-in;
+            cursor: pointer;
+            border-radius: 8px;
+            width: 30px;
+            height: 30px;
+            border: 0px solid;
+            border-color: #fafafa;
+        }
+    }
+    &__ico-content{
+        display: flex;
+        align-items: center;
+        height: 30px;
+        margin-left: 10px;
+        &:nth-child(1){
+            margin-left: 0px;
         }
     }
     &__btns{

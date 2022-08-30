@@ -3,7 +3,7 @@ import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import ProgressBar from './progress/progress'
 import '../../styles/global.scss'
 import TaskList from './task/task'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import TaskModal from './taskmodal'
 import { useLocalStorage } from '../services/services'
 import Timer from './timer/timer'
@@ -19,6 +19,9 @@ export default function Content({target, setTarget, categories, changeCategories
     const [createdTask, incTask] = useLocalStorage('createdTask', 0)
     const [deletedTask, decTask] = useLocalStorage('deletedTask', 0)
     const [complitedTask, countTask] = useLocalStorage('complitedTask', 0)
+
+    useEffect(() => {
+    }, [categories.length])
 
     const addTask = () => {
         const id = Math.floor(Math.random() * 99999999999999)
@@ -71,14 +74,20 @@ export default function Content({target, setTarget, categories, changeCategories
                             <button 
                                 className='content__delete-btn'
                                 onClick={() => {
+                                    const categoryNames = categories.map(el => {
+                                        return el.name
+                                    })
+                                    
+                                    const categoryIndex = categoryNames.findIndex(i => i == target) - 1
+
                                     setNewTask(newTask.filter(item => {
                                         return item.category !== target
                                     }))
                                     changeCategories(categories.filter(item => {
                                         return item.name !== target
                                     }))
-                                    setTarget(categories[0].name)
-                                    toggleTarget(0)
+                                    setTarget(categories[categoryIndex].name)
+                                    toggleTarget(categoryIndex)
                                 }}>
                                 <span>Удалить категорию {target}</span>
                             </button>

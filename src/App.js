@@ -3,10 +3,11 @@ import Sidebar from './components/sidebar/sidebar';
 import Content from './components/content/content';
 import { useState } from 'react';
 import { useLocalStorage } from './components/services/services';
-import { faHouse } from '@fortawesome/free-solid-svg-icons';
+
+import home from './assets/icons/home.svg'
 
 export default function App() {
-  const [categories, changeCategories] = useLocalStorage('categories', [{id: 12314, icon: faHouse, name: 'Дом'}])
+  const [categories, changeCategories] = useLocalStorage('categories', [{id: 12314, icon: home, name: 'Дом'}])
   const [target, setTarget] = useState()
 
   const toggleTarget = (index) => {

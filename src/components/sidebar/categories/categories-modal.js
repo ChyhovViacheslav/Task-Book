@@ -1,6 +1,10 @@
+import { useRef } from 'react'
 import '../../../styles/global.scss'
 
-export default function CategoriesModal({input, categories, active, setActive, changeInput, addCategories}){
+export default function CategoriesModal({currentIco, icoContent, input, active, setActive, changeInput, addCategories}){
+    const inputRef = useRef()
+    const warningRef = useRef()
+    const icoBodyRef = useRef()
 
     const setDefault = () => {
         inputs.value = ''
@@ -19,30 +23,27 @@ export default function CategoriesModal({input, categories, active, setActive, c
                     <div className='modal__inputs'>
                         <div className='modal__text'>
                             <p>Название категории:</p>
-                            <input 
+                            <input
+                                ref={inputRef} 
                                 className='cat-input'
                                 onChange={e =>{ 
                                     changeInput(e.target.value)
                                     if(e.target.value.length >= 12){
                                         e.target.style.border = '1px solid red'
-                                        document.querySelector('.warning').style.opacity = '1'
+                                        warningRef.current.style.opacity = '1'
                                     } else{
                                         e.target.style.border = '1px solid rgba(40, 40, 70, 0.1)'
-                                        document.querySelector('.warning').style.opacity = '0'
+                                        warningRef.current.style.opacity = '0'
                                     }
                                 }} 
                                 placeholder='Введите название категории'
                             />
-                            <p className='warning'>Слишком длинное название категории</p>
+                            <p ref={warningRef} className='warning'>Слишком длинное название категории</p>
                         </div>
                         <div className='modal__ico'>
                             <p>Иконка категории:</p>
-                            <div className='modal__ico-body'>
-                                <i className="fa-solid fa-user-group"><input type='checkbox'/></i>
-                                <i className='fa-solid fa-suitcase'><input type='checkbox'/></i>
-                                <i className="fa-solid fa-dumbbell"><input type='checkbox'/></i>
-                                <i className="fa-solid fa-house"><input type='checkbox'/></i>
-                                <i className="fa-solid fa-graduation-cap"><input type='checkbox'/></i>
+                            <div ref={icoBodyRef} className='modal__ico-body'>
+                                {icoContent}
                             </div>
                         </div>
                     </div>
@@ -56,7 +57,11 @@ export default function CategoriesModal({input, categories, active, setActive, c
                         <button
                             onClick={e => {
                                 e.preventDefault()
-                                if(input.length >= 12){
+                                if(input.length === 0){
+                                    inputRef.current.style.border = '1px solid #F05454'
+                                }else if(currentIco === null){
+                                    icoBodyRef.current.style.border = '1px solid #F05454'
+                                } else if(input.length >= 12){
                                     console.log('Слишком длинное название категории')
                                 } else {
                                     addCategories()
