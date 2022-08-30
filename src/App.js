@@ -1,14 +1,19 @@
 import './styles/global.scss';
 import Sidebar from './components/sidebar/sidebar';
 import Content from './components/content/content';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocalStorage } from './components/services/services';
 
 import home from './assets/icons/home.svg'
 
 export default function App() {
-  const [categories, changeCategories] = useLocalStorage('categories', [{id: 12314, icon: home, name: 'Дом'}])
-  const [target, setTarget] = useState()
+  const [categories, changeCategories] = useLocalStorage('categories', [{id: 12314, icon: home.slice(14, -37), name: 'Дом'}])
+  const [target, setTarget] = useState('')
+
+  useEffect(() => {
+    setTarget(categories[0].name)
+  }, [])
+  
 
   const toggleTarget = (index) => {
     document.querySelectorAll('.categories-item').forEach((el) => {
@@ -16,7 +21,7 @@ export default function App() {
     })
     
     document.querySelectorAll('.categories-item')[index].classList.add('target')
-}
+  }
 
   return (
     <main className='page'>

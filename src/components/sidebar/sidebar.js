@@ -16,7 +16,7 @@ export default function Sidebar({setTarget, categories, changeCategories, toggle
     const [currentIco, setCurrentIco] = useState(null)
     const [input, changeInput] = useState('')
     const ref = useRef([])
-    
+
     useEffect(() => {
 
     }, [currentIco])
