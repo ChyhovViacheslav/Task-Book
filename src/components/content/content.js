@@ -21,6 +21,7 @@ export default function Content({target, setTarget, categories, changeCategories
     const [complitedTask, countTask] = useLocalStorage('complitedTask', 0)
 
     useEffect(() => {
+        
     }, [categories.length])
 
     const addTask = () => {

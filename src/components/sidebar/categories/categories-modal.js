@@ -1,10 +1,10 @@
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import '../../../styles/global.scss'
 
 export default function CategoriesModal({currentIco, icoContent, input, active, setActive, changeInput, addCategories}){
     const inputRef = useRef()
     const warningRef = useRef()
-    const icoBodyRef = useRef()
+    const icoBodyRef = useRef()    
 
     const setDefault = () => {
         inputs.value = ''

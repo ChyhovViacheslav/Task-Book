@@ -1,7 +1,7 @@
 import '../../styles/global.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClipboardList } from '@fortawesome/free-solid-svg-icons'
-import { useEffect, useState, useRef } from 'react'
+import { useState, useRef } from 'react'
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons"
 import CategoriesModal from "./categories/categories-modal"
 
@@ -16,10 +16,6 @@ export default function Sidebar({setTarget, categories, changeCategories, toggle
     const [currentIco, setCurrentIco] = useState(null)
     const [input, changeInput] = useState('')
     const ref = useRef([])
-
-    useEffect(() => {
-
-    }, [currentIco])
 
     const addCategories = () => {
         const id = Math.floor(Math.random() * 99999999999999)
@@ -111,8 +107,7 @@ export default function Sidebar({setTarget, categories, changeCategories, toggle
                             <h3>Добавить</h3>
                         </button>
                         <CategoriesModal
-                            input={input}
-                            categories={categories} 
+                            input={input} 
                             active={modalActive} 
                             setActive={setModalActive} 
                             changeInput={changeInput}
