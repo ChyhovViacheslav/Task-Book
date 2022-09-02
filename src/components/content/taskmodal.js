@@ -99,7 +99,7 @@ export default function TaskModal ({addTask, active, setActive, setTask, setCate
                             onClick={(e) => {
                                 e.preventDefault()
                                 if(category !== '' && task !==''){
-                                    addTask()
+                                    addTask(value)
                                     setDefault()
                                     incTask(++createdTask)
                                 }else{

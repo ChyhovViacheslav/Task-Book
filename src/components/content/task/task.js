@@ -2,10 +2,12 @@ import { useRef, useState } from 'react'
 import '../../../styles/global.scss'
 import DotsModal from '../../interface/dots/dots'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
+import { checkboxClasses } from '@mui/material'
 
 export default function TaskList({ newTask, target, setNewTask, decTask, deletedTask, complitedTaskN, countTask }) {
     const [active, setActive] = useState(false)
     const refEdit = useRef([])
+    const refCheckbox = useRef([])
 
     const emptyTask = newTask.filter(item => {
         if (item.category === target) {
@@ -24,13 +26,8 @@ export default function TaskList({ newTask, target, setNewTask, decTask, deleted
     })
 
     const clearTasks = () => {
-        //Удаляет ВСЕ задачи со ВСЕХ категорий
         const changedTasks = newTask.filter(item => {
-            if (item.category === target) {
-                return item.category !== target
-            } else {
-                return null
-            }
+            return item.category !== target
         })
         setNewTask(changedTasks)
     }
@@ -63,6 +60,7 @@ export default function TaskList({ newTask, target, setNewTask, decTask, deleted
                                                     className='task__input'
                                                     type="checkbox"
                                                     checked={false}
+                                                    ref={el => refCheckbox.current[index] = el}
                                                     onChange={() => {
                                                         const changedTask = newTask.map((item) => {
                                                             return item.id === id ? { ...item, complited: !complited } : item
@@ -70,17 +68,19 @@ export default function TaskList({ newTask, target, setNewTask, decTask, deleted
                                                         countTask(++complitedTaskN)
                                                         setNewTask(changedTask)
                                                     }} />
-                                                <span 
+                                                <span
                                                     className='task__text-content'
-                                                    ref={el => refEdit.current[index] = el}>
-                                                    {task}
+                                                    ref={el => refEdit.current[index] = el}
+                                                    onChange={() => {
+                                                        console.log('Прифки')
+                                                    }}>
+                                                        {task}
                                                 </span>
                                                 <button className='task__edit'
                                                     onClick={() => {
                                                         const currentTask = refEdit.current[index]
+                                                        const currentCheckbox = refCheckbox.current[index]
                                                         if(currentTask.classList.contains('active')){
-                                                            currentTask.contentEditable = false
-                                                            currentTask.classList.toggle('active')
 
                                                             const editedTask = newTask.filter((el, i) => {
                                                                 if(index === i){
@@ -89,9 +89,11 @@ export default function TaskList({ newTask, target, setNewTask, decTask, deleted
                                                             })
 
                                                             if(!editedTask[0]){
-                                                                console.log('Пустое поле')
-                                                            }else if(editedTask[0].length >= 50){
-                                                                console.log('Слишком длинное поле')
+                                                                currentTask.classList.add('warn')
+                                                                currentTask.focus()
+                                                            }else if(editedTask[0].task.length >= 50){
+                                                                currentTask.classList.add('warn')
+                                                                currentTask.focus()
                                                             }else {
                                                                 const editedArr = newTask.map(el => {
                                                                     if(el.id === editedTask[0].id){
@@ -100,11 +102,16 @@ export default function TaskList({ newTask, target, setNewTask, decTask, deleted
                                                                     return el
                                                                 }) 
                                                                 setNewTask(editedArr)
+                                                                currentTask.contentEditable = false
+                                                                currentTask.classList.remove('warn')
+                                                                currentTask.classList.remove('active')
+                                                                currentCheckbox.classList.remove('inactive')
                                                             }
                                                         }else {
                                                             currentTask.contentEditable = true
                                                             currentTask.focus()
-                                                            currentTask.classList.toggle('active')
+                                                            currentTask.classList.add('active')
+                                                            currentCheckbox.classList.add('inactive')
                                                         }
                                                     }} />
                                                 <button className='task__trash'
@@ -155,7 +162,7 @@ export default function TaskList({ newTask, target, setNewTask, decTask, deleted
                                                         countTask(--complitedTaskN)
                                                         setNewTask(changedTask)
                                                     }} />
-                                                <span style={{ textDecoration: 'line-through' }}>{task}</span>
+                                                <span className='task__text-content' style={{ textDecoration: 'line-through' }}>{task}</span>
                                                 <button className='task__trash' onClick={() => {
                                                     const changedTask = newTask.filter((item) => {
                                                         return item.id !== id

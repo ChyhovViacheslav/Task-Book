@@ -44,6 +44,7 @@
         }
     }
     &__active-item{
+        position: relative;
         margin-top: 10px;
         display: flex;
         flex-direction: row;
@@ -58,15 +59,6 @@
             background-color: inherit;
             width: 20px;
             height: 20px;
-        }
-        span{
-            transition: all 0.2s ease-in-out;
-            font-family: 'Nunito';
-            font-weight: 400;
-            font-size: 14px;
-            line-height: 19px;
-            color: $mainText;
-            flex: 1 1 auto;
         }
         &:hover{
             background-color: rgba(41, 161, 156, 0.02);
@@ -85,41 +77,14 @@
             margin-top: 0px;
         }
     }
-    &__complited-title{
-        margin-top: 20px;
-    }
-    &__completed{
-        margin-top: 10px;
-        overflow-y: auto;
-        height: 114px;
-        &::-webkit-scrollbar {
-            width: 8px;
-            background-color: inherit;
-        }
-        &::-webkit-scrollbar-thumb {
-            background-color: #b4b4b4;
-            border-radius: 9em;
-        }
-    }
-    &__input{
-        appearance: none;
-        opacity: 0;
-        cursor: pointer;
-        width: 0px;
-        height: 0px;
-        background-color: inherit;
-        transition: all 0.2s ease-in-out;
-        border: 1px solid $mainColor;
-        border-radius: 4px;
-        margin-right: 0px;
-        &:checked{
-            margin-right: 0px;
-            width: 0px;
-            height: 0px;
-            background-color: $mainColor;
-        }
-    }
     &__text-content{
+        transition: all 0.2s ease-in-out;
+        font-family: 'Nunito';
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+        color: $mainText;
+        flex: 1 1 auto;
         overflow-x: hidden;
         white-space: nowrap;
     }
@@ -139,12 +104,56 @@
           width: 100%; 
         }
     }
+    &__complited-title{
+        margin-top: 20px;
+    }
+    &__completed{
+        margin-top: 10px;
+        overflow-y: auto;
+        height: 114px;
+        &::-webkit-scrollbar {
+            width: 8px;
+            background-color: inherit;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: #b4b4b4;
+            border-radius: 9em;
+        }
+    }
+    &__input{
+        display: block;
+        appearance: none;
+        left: 0;
+        opacity: 0;
+        cursor: pointer;
+        width: 0px;
+        height: 0px;
+        background-color: inherit;
+        transition: all 0.2s ease-in-out;
+        border: 1px solid $mainColor;
+        border-radius: 4px;
+        margin-right: 0px;
+        &:checked{
+            margin-right: 0px;
+            width: 0px;
+            height: 0px;
+            background-color: $mainColor;
+        }
+    }
 }
 
 .active{
     padding: 0px 10px;
     border-radius: 8px;
     outline: 1px solid $mainColor;
+}
+
+.warn{
+    outline: 1px solid $colorRed;
+}
+
+.inactive{
+    display: none;
 }
 
 .item-enter {

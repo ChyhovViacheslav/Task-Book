@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react'
+import { useRef } from 'react'
 import '../../../styles/global.scss'
 
 export default function CategoriesModal({currentIco, icoContent, input, active, setActive, changeInput, addCategories}){
@@ -7,13 +7,11 @@ export default function CategoriesModal({currentIco, icoContent, input, active, 
     const icoBodyRef = useRef()    
 
     const setDefault = () => {
-        inputs.value = ''
-        inputs.style.border = '1px solid rgba(40, 40, 70, 0.1)'
-        document.querySelector('.warning').style.opacity = '0'
+        inputRef.current.value = ''
+        inputRef.current.style.border = '1px solid rgba(40, 40, 70, 0.1)'
+        warningRef.current.style.opacity = '0'
         setActive(false)
     }
-
-    const inputs = document.querySelector('input')
 
     return(
         <div className={active ? 'modal active':'modal'} onClick={() => setDefault()}>

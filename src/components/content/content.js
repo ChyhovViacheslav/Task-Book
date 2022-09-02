@@ -24,13 +24,13 @@ export default function Content({target, setTarget, categories, changeCategories
         
     }, [categories.length])
 
-    const addTask = () => {
+    const addTask = (time) => {
         const id = Math.floor(Math.random() * 99999999999999)
         if(task.length > 49){
             task = `${task.slice(0, 50)}...`
         }
 
-        const newArr = {id: id, category: category, task: task, complited: false}
+        const newArr = {id: id, category: category, task: task, complited: false, time: time}
 
         setNewTask([...newTask, newArr])
     }

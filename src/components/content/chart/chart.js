@@ -1,13 +1,19 @@
+import { useEffect, useState } from 'react';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
 export default function Chart(){
-    const data = [{name: 'пн', uv: 5, pv: 2, amt: 15}, 
-        {name: 'вт', uv: 5, pv: 2, amt: 15}, 
-        {name: 'ср', uv: 5, pv: 4, amt: 15},
-        {name: 'чт', uv: 5, pv: 6, amt: 15},
-        {name: 'пт', uv: 5, pv: 7, amt: 15},
-        {name: 'сб', uv: 5, pv: 9, amt: 15},
-        {name: 'вс', uv: 5, pv: 15, amt: 15}];
+    const [data, setData] = useState()
+    useEffect(() => {
+        const data = [{name: 'пн', uv: 5, pv: 2, amt: 15}, 
+            {name: 'вт', uv: 5, pv: 2, amt: 15}, 
+            {name: 'ср', uv: 5, pv: 4, amt: 15},
+            {name: 'чт', uv: 5, pv: 6, amt: 15},
+            {name: 'пт', uv: 5, pv: 7, amt: 15},
+            {name: 'сб', uv: 5, pv: 9, amt: 15},
+            {name: 'вс', uv: 5, pv: 15, amt: 15}];
+
+        setData(data)
+    }, [])
 
     return(
         <div className="chart">
