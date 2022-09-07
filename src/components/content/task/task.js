@@ -2,7 +2,6 @@ import { useRef, useState } from 'react'
 import '../../../styles/global.scss'
 import DotsModal from '../../interface/dots/dots'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
-import { checkboxClasses } from '@mui/material'
 
 export default function TaskList({ newTask, target, setNewTask, decTask, deletedTask, complitedTaskN, countTask }) {
     const [active, setActive] = useState(false)
@@ -162,7 +161,9 @@ export default function TaskList({ newTask, target, setNewTask, decTask, deleted
                                                         countTask(--complitedTaskN)
                                                         setNewTask(changedTask)
                                                     }} />
-                                                <span className='task__text-content' style={{ textDecoration: 'line-through' }}>{task}</span>
+                                                <span className='task__text-content' style={{ textDecoration: 'line-through' }}>
+                                                    {task}
+                                                </span>
                                                 <button className='task__trash' onClick={() => {
                                                     const changedTask = newTask.filter((item) => {
                                                         return item.id !== id

@@ -1,19 +1,30 @@
 import { useEffect, useState } from 'react';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
-export default function Chart(){
+export default function Chart({newTask}){
     const [data, setData] = useState()
+
+    const currentDay = (day) => {
+        const filtredDay = newTask.filter(el => {
+            const time = el.time.slice(0, 3)
+            if(day === time){
+                return el.complited
+            }
+        })
+        return filtredDay.length
+    }
+
     useEffect(() => {
-        const data = [{name: 'пн', uv: 5, pv: 2, amt: 15}, 
-            {name: 'вт', uv: 5, pv: 2, amt: 15}, 
-            {name: 'ср', uv: 5, pv: 4, amt: 15},
-            {name: 'чт', uv: 5, pv: 6, amt: 15},
-            {name: 'пт', uv: 5, pv: 7, amt: 15},
-            {name: 'сб', uv: 5, pv: 9, amt: 15},
-            {name: 'вс', uv: 5, pv: 15, amt: 15}];
+        const data = [{name: 'пн', uv: (newTask.length), pv: currentDay('Mon'), amt: (newTask.length + 10)}, 
+            {name: 'вт', uv: (newTask.length), pv: currentDay('Tue'), amt: (newTask.length + 10)}, 
+            {name: 'ср', uv: (newTask.length), pv: currentDay('Wed'), amt: (newTask.length + 10)},
+            {name: 'чт', uv: (newTask.length), pv: currentDay('Thu'), amt: (newTask.length + 10)},
+            {name: 'пт', uv: (newTask.length), pv: currentDay('Fri'), amt: (newTask.length + 10)},
+            {name: 'сб', uv: (newTask.length), pv: currentDay('Sat'), amt: (newTask.length + 10)},
+            {name: 'вс', uv: (newTask.length), pv: currentDay('Sun'), amt: (newTask.length + 10)}];
 
         setData(data)
-    }, [])
+    }, [newTask])
 
     return(
         <div className="chart">
@@ -44,7 +55,10 @@ export default function Chart(){
                         fill='#29A19C' 
                         dot={{strokeWidth: 5}} 
                         activeDot={{ r: 8 }} />
-                    {/* <Line type="monotone" dataKey="uv" stroke="#82ca9d" /> */}
+                    <Line 
+                        type="monotone" 
+                        dataKey="uv" 
+                        stroke="#82ca9d" />
                     </LineChart>
             </div>
         </div>

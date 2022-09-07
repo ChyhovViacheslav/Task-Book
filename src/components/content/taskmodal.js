@@ -1,26 +1,25 @@
 import '../../styles/global.scss'
 import { DateTimePicker } from '@mui/x-date-pickers'
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { TextField } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
 export default function TaskModal ({addTask, active, setActive, setTask, setCategory, category, task, createdTask, incTask}){
     const [value, setValue] = useState(Date.now());
+    const refInput = useRef()
+    const refWarn = useRef()
 
     const handleChange = (newValue) => {
         setValue(newValue)
     }
 
     const setDefault = () => {
-        inputs.value = ''
-        inputs.style.border = '1px solid rgba(40, 40, 70, 0.1)'
-        document.querySelector('.task-modal__select')
-        document.querySelector('.warning-task').style.opacity = '0'
+        refInput.current.value = ''
+        refInput.current.style.border = '1px solid rgba(40, 40, 70, 0.1)'
+        refWarn.current.style.opacity = '0'
         setActive(false)
     }
-
-    const inputs = document.querySelector('.task-modal__input')
 
     const categoriesName = JSON.parse(localStorage.getItem('categories')).map((item, index) => {
         const {name} = item
@@ -38,19 +37,24 @@ export default function TaskModal ({addTask, active, setActive, setTask, setCate
                         <div className='task-modal__task'>
                             <p>Что нужно сделать?</p>
                             <input
-                                className='task-modal__input' 
+                                className='task-modal__input'
+                                ref={refInput} 
                                 onChange={e =>{ 
                                     setTask(e.target.value)
                                     if(e.target.value.length >= 50){
                                         e.target.style.border = '1px solid red'
-                                        document.querySelector('.warning-task').style.opacity = '1'
+                                        refWarn.current.style.opacity = '1'
                                     } else{
                                         e.target.style.border = '1px solid rgba(40, 40, 70, 0.1)'
-                                        document.querySelector('.warning-task').style.opacity = '0'
+                                        refWarn.current.style.opacity = '0'
                                     }
                                 }}
                                 type='text'/>
-                            <p className='warning-task'>Слишком длинное название задачи</p>
+                            <p 
+                                className='warning-task'
+                                ref={refWarn}>
+                                    Слишком длинное название задачи
+                            </p>
                         </div>
                         <div className='task-modal__categories'>
                             <div className='task-modal__category-item'>

@@ -24,13 +24,21 @@ export default function Content({target, setTarget, categories, changeCategories
         
     }, [categories.length])
 
+
+
     const addTask = (time) => {
         const id = Math.floor(Math.random() * 99999999999999)
         if(task.length > 49){
             task = `${task.slice(0, 50)}...`
         }
 
-        const newArr = {id: id, category: category, task: task, complited: false, time: time}
+        const newArr = {
+            id: id, 
+            category: category, 
+            task: task, 
+            complited: false, 
+            time: `${time}`, 
+            created: Date(Date.now()).slice(0, 3)}
 
         setNewTask([...newTask, newArr])
     }
@@ -45,6 +53,9 @@ export default function Content({target, setTarget, categories, changeCategories
                         }}>
                             <FontAwesomeIcon className='content__btn-ico' icon={faCirclePlus}/>
                             <span>Новая задача</span>
+                        </button>
+                        <button className='content__mode'>
+                            
                         </button>
                         <div className='content__user'>
                             <h3>Хорошего дня, username</h3>
@@ -95,9 +106,11 @@ export default function Content({target, setTarget, categories, changeCategories
                         </div>
                         <div className='content__inf'>
                             <Timer/>
-                            <Remark/>
+                            <Remark
+                                newTask={newTask}/>
                             <Facts/>
-                            <Chart/>
+                            <Chart
+                                newTask={newTask}/>
                         </div>
                    </div>
                 </div>
