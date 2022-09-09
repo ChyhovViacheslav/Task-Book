@@ -1,15 +1,16 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
-import ProgressBar from './progress/progress'
 import '../../styles/global.scss'
+
+import ProgressBar from './progress/progress'
 import TaskList from './task/task'
-import { useState, useEffect } from 'react'
-import TaskModal from './taskmodal'
+import { useState, useEffect, useContext } from 'react'
+import TaskModal from './taskmodal/taskmodal'
 import { useLocalStorage } from '../services/services'
 import Timer from './timer/timer'
 import Remark from './remark/remark'
 import Facts from './facts/facts'
 import Chart from './chart/chart'
+import { ThemeContext } from '../theme/ThemeProvider'
+import { IconSelector } from '../../assets/icons/icons'
 
 export default function Content({target, setTarget, categories, changeCategories, toggleTarget}){
     const [active, setActive] = useState(false)
@@ -19,6 +20,7 @@ export default function Content({target, setTarget, categories, changeCategories
     const [createdTask, incTask] = useLocalStorage('createdTask', 0)
     const [deletedTask, decTask] = useLocalStorage('deletedTask', 0)
     const [complitedTask, countTask] = useLocalStorage('complitedTask', 0)
+    const {type, setType} = useContext(ThemeContext)
 
     useEffect(() => {
         
@@ -51,11 +53,19 @@ export default function Content({target, setTarget, categories, changeCategories
                         <button className="content__btn" onClick={() => {
                             setActive(true)
                         }}>
-                            <FontAwesomeIcon className='content__btn-ico' icon={faCirclePlus}/>
+                            <IconSelector id={'circle-plus'}/>
                             <span>Новая задача</span>
                         </button>
-                        <button className='content__mode'>
-                            
+                        <button 
+                            className='content__mode'
+                            onClick={() => {
+                                if(type === 'light'){
+                                    setType('dark')
+                                } else {
+                                    setType('light')
+                                }
+                            }}>
+                            <IconSelector id={type === 'light' ? 'moon' : 'sun'}/>
                         </button>
                         <div className='content__user'>
                             <h3>Хорошего дня, username</h3>

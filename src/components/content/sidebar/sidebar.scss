@@ -1,12 +1,16 @@
 .sidebar{
     display: flex;
-    min-height: 100vh;
-    background-color: #FFFFFF;
     box-shadow: 0px 10px 25px rgba(29, 52, 54, 0.08);
     &__body{
+        transition: background-color 0.2s ease-in-out;
+        background-color: var(--block-white);
+        min-height: 100vh;
         width: 230px;
         padding: 20px 0px 20px 20px;
         overflow: hidden;
+    }
+    &__body.dark{
+        background-color: var(--block-dark);
     }
     &__logo{
         display: flex;
@@ -14,7 +18,7 @@
         align-items: center;
     }
     &__icon{
-        color: $mainColor;
+        color: var(--main-color);
         font-size: 54px;
     }
     &__title{
@@ -49,15 +53,15 @@
     &__name{
         margin-left: 10px;
         pointer-events: none;
-        color: $mainText;
+        color: var(--text-dark);
         user-select: none;
-        transition: margin-left 0.3s ease-in-out;
+        transition: margin-left 0.3s ease-in-out, color 0.2s ease-in-out;
     }
-    &__btn-icon{
-        color: $mainColor;
-        font-size: 18px;
+    &__name.dark{
+        color: var(--text-light);
+    }
+    &__btn-ico{
         transition: all 0.3s ease-in-out;
-        pointer-events: none;
     }
     &__btn{
         margin-top: 30px;
@@ -66,7 +70,7 @@
         background-color: inherit;
         h3{
             margin-left: 10px;
-            color: $mainColor;
+            color: var(--main-color);
             transition: all 0.2s ease-in-out;
             user-select: none;
         }
@@ -74,8 +78,8 @@
             h3{
                 color: #1d6e6c;
             }
-            .categories-item__btn-icon{
-                color: #1d6e6c;
+            .categories-item__btn-ico{            
+                stroke: #1d6e6c;
             }
         }
     }
@@ -92,7 +96,7 @@
         right: -30px;
         height: 100%;
         width: 30px;
-        background-color: $mainColor;
+        background-color: var(--main-color);
         border-radius: 12px 0px 0px 12px;
         transition: all 0.3s ease-in-out;
     }

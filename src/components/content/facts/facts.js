@@ -1,4 +1,7 @@
+import '../../../styles/global.scss';
+
 import { useEffect, useState } from "react"
+import Block from '../../interface/block/block';
 
 export default function Facts(){
     const [randomNumb, setNumb] = useState()
@@ -21,15 +24,10 @@ export default function Facts(){
     }, [randomNumb])
     
     return(
-        <div className="facts">
-            <div className="facts__body">
-                <div className="facts__title">
-                    <h1>Совет дня</h1>
-                </div>
-                <div className="facts__content">
+        <Block className={'facts'} title={'Совет дня'}>
+            <div className="facts__content">
                     <p>{facts[randomNumb]}</p>
                 </div>
-            </div>
-        </div>
+        </Block>
     )
 }

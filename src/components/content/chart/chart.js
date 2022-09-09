@@ -1,5 +1,7 @@
+import '../../../styles/global.scss';
 import { useEffect, useState } from 'react';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { LineChart, Line, CartesianGrid, XAxis, YAxis } from 'recharts';
+import Block from '../../interface/block/block';
 
 export default function Chart({newTask}){
     const [data, setData] = useState()
@@ -27,40 +29,35 @@ export default function Chart({newTask}){
     }, [newTask])
 
     return(
-        <div className="chart">
-            <div className="chart__body">
-                <div className="chart__title">
-                    <h1>График успеваемости</h1>
-                </div>
-                <LineChart
-                    fontFamily='Nunito'
-                    fontSize='12px'
-                    width={430}
-                    height={170}
-                    data={data}
-                    margin={{
-                        top: 20,
-                        right: 0,
-                        left: -35,
-                        bottom: 0,
-                    }}
-                    >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Line 
-                        type="monotone" 
-                        dataKey="pv" 
-                        stroke="#29A19C" 
-                        fill='#29A19C' 
-                        dot={{strokeWidth: 5}} 
-                        activeDot={{ r: 8 }} />
-                    <Line 
-                        type="monotone" 
-                        dataKey="uv" 
-                        stroke="#82ca9d" />
-                    </LineChart>
-            </div>
-        </div>
+        <Block className={'chart'} title={'График успеваемости'}>
+            <LineChart
+                fontFamily='Nunito'
+                fontSize='12px'
+                width={430}
+                height={170}
+                data={data}
+                margin={{
+                    top: 20,
+                    right: 0,
+                    left: -35,
+                    bottom: 0,
+                }}
+            >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Line 
+                    type="monotone" 
+                    dataKey="pv" 
+                    stroke="#29A19C" 
+                    fill='#29A19C' 
+                    dot={{strokeWidth: 5}} 
+                    activeDot={{ r: 8 }} />
+                <Line 
+                    type="monotone" 
+                    dataKey="uv" 
+                    stroke="#82ca9d" />
+            </LineChart>
+        </Block>
     )
 }

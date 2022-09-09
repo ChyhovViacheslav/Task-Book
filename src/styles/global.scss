@@ -13,27 +13,43 @@ $colorBg: #F0F0F0;
 $mainColor: #29A19C;
 $mainText: #282846;
 $colorRed: #F05454;
+:root{
+    --bg-light: #F0F0F0;
+    --bg-dark: #222831;
+    --block-dark: #2C3440;
+    --block-white: #FFFFFF;
+    --text-dark: #282846;
+    --text-light: #F9F9F9;
+    --main-color: #29A19C;
+    --main-red: #F05454;
+}
 //<ПЕРЕМЕННЫЕ>==============================================================================
 
 //<ОБНУЛЯЮЩИЙ СПИСОК>==================================================================
 @import "./nullstyle.scss";
 body {
-    background-color: $colorBg;
     font-size: 14px;
     &._lock {
         overflow: hidden;
     }
 }
+.layout{
+    background-color: var(--bg-light);
+    transition: all 0.2s ease-in-out;
+}
+.layout.dark{
+    background-color: var(--bg-dark);
+}
 h1{
     font-family: 'Nunito';
-    color: $mainColor;
+    color: var(--main-color);
     font-size: 18px;
     line-height: 25px;
     font-weight: 600;
 }
 h2{
     font-family: 'Nunito';
-    color: $mainColor;
+    color: var(--main-color);
     font-size: 24px;
     font-weight: 600;
     line-height: 33px;
@@ -43,21 +59,21 @@ h3{
     font-family: 'Nunito';
     font-size: 16px;
     font-weight: 400;
-    color: #282846;
+    color: var(--text-dark);
     line-height: 22px;
 }
 h4{
     font-family: 'Nunito';
     font-size: 20px;
     line-height: 27px;
-    color: $mainColor;
+    color: var(--main-color);
     font-weight: 700;
 }
 h5{
     font-family: 'Nunito';
     font-size: 12px;
     line-height: 16px;
-    color: $mainText;
+    color: var(--text-dark);
     font-weight: 600;
     letter-spacing: 2%;
 }
@@ -96,17 +112,18 @@ h5{
 
 //<ФАЙЛЫ СТИЛЕЙ СТРАНИЦ И ЭЛЕМЕНТОВ>================================================================================
 @import "../App.scss";
-@import "../components/sidebar/sidebar.scss";
-@import "../components/sidebar/categories/categories-modal.scss";
+@import "../components/content/sidebar/sidebar.scss";
+@import "../components/content/categories/categories-modal.scss";
 @import "../components/content/content.scss";
 @import "../components/content/progress/progress.scss";
 @import "../components/content/task/task.scss";
-@import "../components/content/taskmodal.scss";
+@import "../components/content/taskmodal/taskmodal.scss";
 @import "../components/content/timer/timer.scss";
 @import "../components/content/remark/remark.scss";
 @import "../components/content/facts/facts.scss";
 @import "../components/content/chart/chart.scss";
 @import "../components/interface/dots/dots.scss";
+@import "../components/interface/block/block.scss";
 //<ФАЙЛЫ СТИЛЕЙ СТРАНИЦ И ЭЛЕМЕНТОВ>================================================================================
 
 //<ОСНОВНОЙ БЛОК>================================================================================

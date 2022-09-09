@@ -1,5 +1,5 @@
-import './styles/global.scss';
-import Sidebar from './components/sidebar/sidebar';
+import './styles/global.scss'
+import Sidebar from './components/content/sidebar/sidebar';
 import Content from './components/content/content';
 import { useState, useEffect } from 'react';
 import { useLocalStorage } from './components/services/services';

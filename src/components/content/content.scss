@@ -9,6 +9,11 @@
         justify-content: space-between;
         align-items: center;
     }
+    &__mode{
+        display: flex;
+        align-items: center;
+        background-color: inherit;
+    }
     &__content{
         margin-top: 30px;
         display: flex;
@@ -27,7 +32,7 @@
         align-items: center;
         color: #fafafa;
         padding: 10px 25px;
-        background-color: $mainColor;
+        background-color: var(--main-color);
         border-radius: 8px;
         transition: all 0.2s ease-in-out;
         span{
@@ -49,7 +54,7 @@
         margin-top: 30px;
         color: #fafafa;
         padding: 10px 25px;
-        background-color: $colorRed;
+        background-color: var(--main-red);
         border-radius: 8px;
         transition: all 0.2s ease-in-out;
         width: 100%;
