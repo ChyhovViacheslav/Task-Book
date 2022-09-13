@@ -1,9 +1,12 @@
-import { createContext, useState } from "react";
+import { createContext } from "react";
+import { useLocalStorage } from "../services/services";
 
-export const ThemeContext = createContext({theme: 'light'})
+export const ThemeContext = createContext({type: false})
 
 export const ThemeProvider = ({children}) => {
-  const [type, setType] = useState('light')
+
+  const [type, setType] = useLocalStorage('theme', false)
+
   return (
     <ThemeContext.Provider value={{type, setType}}>
       {children}

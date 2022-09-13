@@ -80,7 +80,7 @@
         font-weight: 400;
         font-size: 14px;
         line-height: 19px;
-        color: $mainText;
+        color: var(--text-dark);
         flex: 1 1 auto;
         overflow-x: hidden;
         white-space: nowrap;
@@ -88,12 +88,16 @@
     &__edit{
         margin-left: 10px;
         .ico{
-            fill: var(--text-dark);
+            path{
+                fill: var(--text-dark);
+            }
         }
-    }
-    &__edit.dark{
-        .ico{
-            fill: var(--text-light);
+        &.dark{
+            .ico{
+                path{
+                    fill: var(--text-light);
+                }
+            }
         }
     }
     &__trash{

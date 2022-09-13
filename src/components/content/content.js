@@ -59,13 +59,9 @@ export default function Content({target, setTarget, categories, changeCategories
                         <button 
                             className='content__mode'
                             onClick={() => {
-                                if(type === 'light'){
-                                    setType('dark')
-                                } else {
-                                    setType('light')
-                                }
+                                setType(!type)
                             }}>
-                            <IconSelector id={type === 'light' ? 'moon' : 'sun'}/>
+                            <IconSelector id={type ? 'moon' : 'sun'}/>
                         </button>
                         <div className='content__user'>
                             <h3>Хорошего дня, username</h3>
@@ -136,6 +132,7 @@ export default function Content({target, setTarget, categories, changeCategories
                 setNewTask={setNewTask} 
                 active={active}
                 setActive={setActive}
+                categories={categories}
             />
         </section>
     )

@@ -16,7 +16,10 @@
         width: 700px;
         padding: 20px;
         border-radius: 10px;
-        background-color: white;
+        background-color: var(--block-white);
+        &.dark{
+            background-color: var(--block-dark);
+        }
     }
     &__form{
         p{
@@ -24,49 +27,31 @@
             font-weight: 700;
             font-size: 14px;
             line-height: 19px;
-            color: $mainText;
+            color: var(--text-dark);
+        }
+        &.dark{
+            p{
+                color: var(--text-light);
+            }
         }
     }
     &__inputs{
         margin-top: 30px;
         display: flex;
-        input{
-            font-family: 'Nunito';
-            font-weight: 400;
-            font-size: 14px;
-            line-height: 19px;
-            color: black;
-            padding: 8px 15px;
-            border-radius: 8px;
-            width: 100%;
-            transition: all 0.3s ease-in-out;
-        }
-        .cat-input{
-            border: 1px solid rgba(40, 40, 70, 0.1);
-        }
-        i{
-            position: relative;
-            margin-left: 10px;
-            &:nth-child(1){
-                margin-left: 0px;
-            }
-            &::before{
-                position: absolute;
-                transform: translate(-50%, -50%);
-                top: 50%;
-                left: 50%;
-                font-size: 26px;
-                pointer-events: none;
-            }
-            input{
-                -webkit-appearance: none;
-                appearance: none;
-                width: 37px;
-                height: 100%;
-                &:checked{
-                    background-color: $mainColor;
-                }
-            }
+    }
+    &__text-input{
+        font-family: 'Nunito';
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+        color: black;
+        padding: 8px 15px;
+        border-radius: 8px;
+        width: 100%;
+        border: 1px solid rgba(40, 40, 70, 0.1);
+        &.dark{
+            background-color: var(--bg-dark);
+            color: var(--text-light);
         }
     }
     &__text{
@@ -86,7 +71,7 @@
             font-weight: 400;
             font-size: 12px;
             line-height: 120%;
-            color: $colorRed;
+            color: var(--main-red)!important;
             margin-left: 15px;
             &::before{
                 content: url(../../../assets/icons/triangle-exclamation-solid.svg);
@@ -109,9 +94,13 @@
         flex-direction: row;
         align-items: center;
         height: 100%;
-        padding: 1px 10px 0px 10px;
-        border-radius: 8px;
-
+        padding: 1px 10px 0px 0px;
+        svg{
+            path{
+                transition: stroke 0.2s ease-in-out;
+                stroke: var(--text-dark);
+            }
+        }
         input{
             -webkit-appearance: none;
             appearance: none;
@@ -119,20 +108,16 @@
             padding: 0px;
             width: auto;
             height: 100%;
-            &:checked + img{
-                transition: border-color 0.2s ease-in;
-                border: 2px solid;
-                border-color: #1b7471;
+            &:checked + svg{
+                path{   
+                    stroke: var(--main-color);
+                }
             }
         }
-        img{
-            transition: border-color 0.2s ease-in;
+        svg{
             cursor: pointer;
-            border-radius: 8px;
             width: 30px;
             height: 30px;
-            border: 0px solid;
-            border-color: #fafafa;
         }
     }
     &__ico-content{
@@ -142,6 +127,13 @@
         margin-left: 10px;
         &:nth-child(1){
             margin-left: 0px;
+        }
+    }
+    &__ico-color{
+        &.dark{
+            path{
+                stroke: var(--text-light);
+            }
         }
     }
     &__btns{
@@ -159,7 +151,7 @@
     }
 
     &__btn-cnsl{
-        background-color: $colorRed;
+        background-color: var(--main-red);
         transition: all 0.2s ease-in-out;
         &:hover{
             background-color: #a53a3a;
@@ -167,7 +159,7 @@
     }
 
     &__btn-sbmt{
-        background-color: $mainColor;
+        background-color: var(--main-color);
         transition: all 0.2s ease-in-out;
         &:hover{
             background-color: #1b7471;
@@ -175,7 +167,7 @@
     }
 }
 
-.modal.active{
+.modal.active-mod{
     opacity: 1;
     pointer-events: all;
 }

@@ -1,14 +1,16 @@
 import '../../../styles/global.scss';
 import { DateTimePicker } from '@mui/x-date-pickers';
-import { useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { TextField } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { ThemeContext } from '../../theme/ThemeProvider';
 
-export default function TaskModal ({addTask, active, setActive, setTask, setCategory, category, task, createdTask, incTask}){
+export default function TaskModal ({categories, addTask, active, setActive, setTask, setCategory, category, task, createdTask, incTask}){
     const [value, setValue] = useState(Date.now());
     const refInput = useRef()
     const refWarn = useRef()
+    const {type} = useContext(ThemeContext)
 
     const handleChange = (newValue) => {
         setValue(newValue)
@@ -21,7 +23,7 @@ export default function TaskModal ({addTask, active, setActive, setTask, setCate
         setActive(false)
     }
 
-    const categoriesName = JSON.parse(localStorage.getItem('categories')).map((item, index) => {
+    const categoriesName = categories.map((item, index) => {
         const {name} = item
         return (
             <option key={name} value={index}>{name}</option>
@@ -30,10 +32,10 @@ export default function TaskModal ({addTask, active, setActive, setTask, setCate
 
     return (
         <div className={active ? 'task-modal active' : 'task-modal'} onClick={() => setDefault()}>
-            <div className='task-modal__body' onClick={(e) => e.stopPropagation()}>
+            <div className={type ? 'task-modal__body' : 'task-modal__body dark'} onClick={(e) => e.stopPropagation()}>
                 <form className='task-modal__form'>
                     <h4>Добавить новую задачу</h4>
-                    <div className='task-modal__inputs'>
+                    <div className={type ? 'task-modal__inputs' : 'task-modal__inputs dark'}>
                         <div className='task-modal__task'>
                             <p>Что нужно сделать?</p>
                             <input
@@ -60,7 +62,7 @@ export default function TaskModal ({addTask, active, setActive, setTask, setCate
                             <div className='task-modal__category-item'>
                                 <p>Категория</p>
                                 <select 
-                                    className='task-modal__select'
+                                    className={type ? 'task-modal__select' : 'task-modal__select dark'}
                                     defaultValue='DEF'
                                     onChange={(e) => {
                                         setCategory(e.target.selectedOptions[0].text)
@@ -72,16 +74,15 @@ export default function TaskModal ({addTask, active, setActive, setTask, setCate
                             <div className='task-modal__category-item'>
                                 <p>Когда?</p>
                                 <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                    <DateTimePicker 
-                                        renderInput={(params) => <TextField {...params}/>} 
-                                        label='' 
+                                    <DateTimePicker
+                                        renderInput={(params) => <TextField  className='task-modal__when-input' {...params}/>}  
                                         onChange={handleChange} 
                                         value={value}/>
                                     </LocalizationProvider>
                             </div>
                             <div className='task-modal__category-item'>
                                 <p>Приоритет</p>
-                                <select defaultValue='DEF' className='task-modal__select'>
+                                <select defaultValue='DEF' className={type ? 'task-modal__select' : 'task-modal__select dark'}>
                                     <option value='DEF' hidden>Выбрать</option>
                                     <option value='hight'>Высокий</option>
                                     <option value='low'>Низкий</option>

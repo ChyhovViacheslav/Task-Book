@@ -1,10 +1,12 @@
-import { useRef } from 'react'
+import { useContext, useRef } from 'react'
 import '../../../styles/global.scss'
+import { ThemeContext } from '../../theme/ThemeProvider'
 
 export default function CategoriesModal({currentIco, icoContent, input, active, setActive, changeInput, addCategories}){
     const inputRef = useRef()
     const warningRef = useRef()
     const icoBodyRef = useRef()    
+    const {type} = useContext(ThemeContext)
 
     const setDefault = () => {
         inputRef.current.value = ''
@@ -14,16 +16,16 @@ export default function CategoriesModal({currentIco, icoContent, input, active, 
     }
 
     return(
-        <div className={active ? 'modal active':'modal'} onClick={() => setDefault()}>
-            <div className='modal__body' onClick={e => e.stopPropagation()}>
-                <form className='modal__form' id='1'>
+        <div className={active ? 'modal active-mod':'modal'} onClick={() => setDefault()}>
+            <div className={type ? 'modal__body' : 'modal__body dark'} onClick={e => e.stopPropagation()}>
+                <form className={type ? 'modal__form' : 'modal__form dark'} id='1'>
                     <h4>Добавить новую категорию</h4>
                     <div className='modal__inputs'>
                         <div className='modal__text'>
                             <p>Название категории:</p>
                             <input
                                 ref={inputRef} 
-                                className='cat-input'
+                                className={type ? 'modal__text-input' : 'modal__text-input dark'}
                                 onChange={e =>{ 
                                     changeInput(e.target.value)
                                     if(e.target.value.length >= 12){
@@ -36,7 +38,9 @@ export default function CategoriesModal({currentIco, icoContent, input, active, 
                                 }} 
                                 placeholder='Введите название категории'
                             />
-                            <p ref={warningRef} className='warning'>Слишком длинное название категории</p>
+                            <p ref={warningRef} className='warning'>
+                                Слишком длинное название категории
+                            </p>
                         </div>
                         <div className='modal__ico'>
                             <p>Иконка категории:</p>
