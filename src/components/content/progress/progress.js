@@ -16,7 +16,7 @@ export default function ProgressBar({createdTask, deletedTask, complitedTask, in
     useEffect(() => {
         isPause.current = false
         if(!isPause){
-            const interval = setInterval(() => {
+            setInterval(() => {
                 refreshCounter()
             }, 6.048e+8)
         }

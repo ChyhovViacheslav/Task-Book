@@ -8,9 +8,9 @@ import { IconSelector } from '../../../assets/icons/icons'
 
 export default function Sidebar({setTarget, categories, changeCategories, toggleTarget}){
     const [modalActive, setModalActive] = useState(false)
-    const [icons, setIcons] = useState(['home', 'zap', 'briefcase', 'users'])
     const [currentIco, setCurrentIco] = useState(null)
     const [input, changeInput] = useState('')
+    const icons = ['home', 'zap', 'briefcase', 'users']
     const ref = useRef([])
     const {type} = useContext(ThemeContext)
 

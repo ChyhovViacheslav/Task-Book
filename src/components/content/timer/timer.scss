@@ -7,6 +7,7 @@
     &__ico{
         margin-right: 12px;
         path{
+            transition: stroke 0.2s ease-in-out;
             stroke: var(--text-dark);
         }
     }

@@ -6,17 +6,17 @@ import Block from '../../interface/block/block';
 export default function Chart({newTask}){
     const [data, setData] = useState()
 
-    const currentDay = (day) => {
-        const filtredDay = newTask.filter(el => {
-            const time = el.time.slice(0, 3)
-            if(day === time){
-                return el.complited
-            }
-        })
-        return filtredDay.length
-    }
-
     useEffect(() => {
+        const currentDay = (day) => {
+            const filtredDay = newTask.filter(el => {
+                const time = el.time.slice(0, 3)
+                if(day === time){
+                    return el.complited
+                } else return null
+            })
+            return filtredDay.length
+        }
+
         const data = [{name: 'пн', uv: (newTask.length), pv: currentDay('Mon'), amt: (newTask.length + 10)}, 
             {name: 'вт', uv: (newTask.length), pv: currentDay('Tue'), amt: (newTask.length + 10)}, 
             {name: 'ср', uv: (newTask.length), pv: currentDay('Wed'), amt: (newTask.length + 10)},
@@ -53,10 +53,6 @@ export default function Chart({newTask}){
                     fill='#29A19C' 
                     dot={{strokeWidth: 5}} 
                     activeDot={{ r: 8 }} />
-                <Line 
-                    type="monotone" 
-                    dataKey="uv" 
-                    stroke="#82ca9d" />
             </LineChart>
         </Block>
     )

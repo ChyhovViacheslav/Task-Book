@@ -15,18 +15,20 @@
             font-size: 14px;
             line-height: 19px;
             letter-spacing: 0.02em;
+            transition: color 0.2s ease-in-out;
         }
         span{
             color: var(--text-dark);
+            transition: color 0.2s ease-in-out;
         }
-    }
-    &__body.dark{
-        background-color: var(--block-dark);
-        p{
-            color: var(--text-light);
-        }
-        span{
-            color: var(--text-light);
+        &.dark{
+            background-color: var(--block-dark);
+            p{
+                color: var(--text-light);
+            }
+            span{
+                color: var(--text-light);
+            }
         }
     }
 }

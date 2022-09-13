@@ -178,18 +178,22 @@ export default function TaskList({ newTask, target, setNewTask, decTask, deleted
                                             <span className='task__text-content' style={{ textDecoration: 'line-through' }}>
                                                 {task}
                                             </span>
-                                            <button className='task__trash' onClick={() => {
-                                                const changedTask = newTask.filter((item) => {
-                                                    return item.id !== id
-                                                })
-                                                setNewTask(changedTask)
-                                                decTask(++deletedTask)
-                                                countTask(--complitedTaskN)
-                                            }}>
+                                            <button 
+                                                className='task__trash' 
+                                                onClick={() => {
+                                                    const changedTask = newTask.filter((item) => {
+                                                        return item.id !== id
+                                                    })
+                                                    setNewTask(changedTask)
+                                                    decTask(++deletedTask)
+                                                    countTask(--complitedTaskN)
+                                                }}>
                                             </button>
                                                 </div>
                                     </CSSTransition>
                                 )
+                            } else {
+                                return null
                             }
                         })}
                     </TransitionGroup>

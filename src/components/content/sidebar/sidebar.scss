@@ -1,16 +1,17 @@
 .sidebar{
     display: flex;
     box-shadow: 0px 10px 25px rgba(29, 52, 54, 0.08);
+    min-height: 100vh;
     &__body{
         transition: background-color 0.2s ease-in-out;
         background-color: var(--block-white);
-        min-height: 100vh;
+        height: 100%;
         width: 230px;
         padding: 20px 0px 20px 20px;
         overflow: hidden;
-    }
-    &__body.dark{
-        background-color: var(--block-dark);
+        &.dark{
+            background-color: var(--block-dark);
+        }
     }
     &__logo{
         display: flex;

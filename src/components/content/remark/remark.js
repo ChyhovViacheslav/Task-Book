@@ -1,10 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Block from "../../interface/block/block";
 
 export default function Remark({ newTask }){
-    
+    const currentDay = useRef()
     useEffect(() => {
-      
+        
     }, [newTask])
     
     const CreatedTask = () => {
@@ -53,7 +53,7 @@ export default function Remark({ newTask }){
             if(days === 'Вторник') {
                 return <p>Больше всего задач вы создаете во <span>{days}</span></p>
             } else{
-                return <p>Больше всего задач вы создаете в <span>{days}</span></p>
+                return <p ref={currentDay}>Больше всего задач вы создаете в <span>{days}</span></p>
             }
         } else {
             return <p>Вы пока не создали никаких задач</p>
@@ -62,8 +62,8 @@ export default function Remark({ newTask }){
     return (
         <Block className={'remark'} title={'Наблюдение'}>
                 <div className="remark__content">
-                    <div className="remark__create">
-                        <CreatedTask/>
+                    <div className={"remark__create"}>
+                        <CreatedTask />
                     </div>
                     <div className="remark__complited">
                         <p>Больше всего задач вы завершаете во <span>Вторник</span></p>

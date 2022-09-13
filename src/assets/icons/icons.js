@@ -1,19 +1,5 @@
 import React from 'react'
 
-import briefcase from './briefcase.svg'
-import calendar from './calendar.svg'
-import chevrondown from './chevron-down.svg'
-import clock from './clock.svg'
-import home from './home.svg'
-import moon from './moon.svg';
-import plussquare from './plus-square.svg';
-import sun from './sun.svg';
-import trash from './trash.svg';
-import triangle from './triangle-exclamation-solid.svg';
-import users from './users.svg';
-import zap from './zap.svg';
-
-
 export const IconSelector = ({id, className}) => {
     switch (id) {
         case 'briefcase':
