@@ -12,12 +12,21 @@
     pointer-events: none;
     transition: opacity 0.3s;
     &__body{
-        width: 700px;
         padding: 20px;
         border-radius: 10px;
         background-color: var(--block-white);
         &.dark{
             background-color: var(--block-dark);
+            .ico{
+                path{
+                    fill: var(--block-white);
+                }
+            }
+            .calendar::-webkit-calendar-picker-indicator{
+                background: url('../../../assets/icons/calendar-white.svg') no-repeat;
+                background-size: contain;
+                cursor: pointer;
+            }
         }
     }
     &__inputs{
@@ -70,6 +79,7 @@
             line-height: 120%;
             color: var(--main-red) !important;
             margin-left: 15px;
+            pointer-events: none;
             &::before{
                 content: url(../../../assets/icons/triangle-exclamation-solid.svg);
                 position: absolute;
@@ -85,24 +95,27 @@
         flex-direction: row;
         margin-top: 40px;
         width: 100%;
-        justify-content: space-between;
+        :nth-child(1){
+            margin-right: 30px;
+        }
     }
     &__category-item{
+        display: flex;
+        flex-direction: column;
         position: relative;
         width: 200px;
         p{
             margin-bottom: 10px;
         }
-        &::after{
-            content:url(../../../assets/icons/chevron-down.svg);
+        .ico{
             position: absolute;
             right: 15px;
             top: 40px;
         }
-        &:nth-child(2){
-            &::after{
-                content: none;
-            }
+        .calendar::-webkit-calendar-picker-indicator{
+            background: url('../../../assets/icons/calendar.svg') no-repeat;
+            background-size: contain;
+            cursor: pointer;
         }
     }
     &__when-input{
@@ -159,7 +172,7 @@
     }
 }
 
-.active{
+.show{
     opacity: 1;
     pointer-events: all;
 }

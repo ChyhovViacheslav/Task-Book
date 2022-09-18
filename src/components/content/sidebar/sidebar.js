@@ -12,6 +12,7 @@ export default function Sidebar({setTarget, categories, changeCategories, toggle
     const [input, changeInput] = useState('')
     const icons = ['home', 'zap', 'briefcase', 'users']
     const ref = useRef([])
+    const icoBodyRef = useRef()
     const {type} = useContext(ThemeContext)
 
     const addCategories = () => {
@@ -19,22 +20,15 @@ export default function Sidebar({setTarget, categories, changeCategories, toggle
 
         const newArr = {id: id, icon: currentIco, name: input}
 
-        const names = (el) => el.name === newArr.name;
-
-        if(categories.length >= 10){
-            console.log("Слишком много категорий")
-        } else if (categories.some(names)){
-            console.log('Повтор названия')
-        } else{
-            changeCategories([...categories, newArr])
-        }
+        changeCategories([...categories, newArr])
     }
 
     const icoContent = icons.map((item, index) => {
         return (
-            <label key={index} className='modal__ico-content'>
+            <label className='modal__ico-content' key={index}>
                 <input
                     onClick={() => {
+                        icoBodyRef.current.style.outline = 'none'
                         setCurrentIco(item)
                     }}
                     ref={el => ref.current[index] = el} 
@@ -87,6 +81,7 @@ export default function Sidebar({setTarget, categories, changeCategories, toggle
                             <h3>Добавить</h3>
                         </button>
                         <CategoriesModal
+                            icoBodyRef={icoBodyRef}
                             input={input} 
                             active={modalActive} 
                             setActive={setModalActive} 
@@ -94,6 +89,7 @@ export default function Sidebar({setTarget, categories, changeCategories, toggle
                             addCategories={addCategories}
                             icoContent={icoContent}
                             currentIco={currentIco}
+                            categories={categories}
                         />
                     </div>
                 </div>

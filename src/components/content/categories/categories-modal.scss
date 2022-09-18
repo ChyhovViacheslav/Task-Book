@@ -13,7 +13,6 @@
     transition: opacity 0.3s;
     z-index: 999;
     &__body{
-        width: 700px;
         padding: 20px;
         border-radius: 10px;
         background-color: var(--block-white);
@@ -38,21 +37,6 @@
     &__inputs{
         margin-top: 30px;
         display: flex;
-    }
-    &__text-input{
-        font-family: 'Nunito';
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 19px;
-        color: black;
-        padding: 8px 15px;
-        border-radius: 8px;
-        width: 100%;
-        border: 1px solid rgba(40, 40, 70, 0.1);
-        &.dark{
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-        }
     }
     &__text{
         position: relative;
@@ -83,6 +67,21 @@
             }
         }
     }
+    &__text-input{
+        font-family: 'Nunito';
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+        color: black;
+        padding: 8px 15px;
+        border-radius: 8px;
+        border: 1px solid rgba(40, 40, 70, 0.1);
+        min-width: 350px;
+        &.dark{
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+        }
+    }
     &__ico{
         display: flex;
         flex-direction: column;
@@ -94,7 +93,8 @@
         flex-direction: row;
         align-items: center;
         height: 100%;
-        padding: 1px 10px 0px 0px;
+        border-radius: 8px;
+        padding: 0px 6px 0px 5px;
         svg{
             path{
                 transition: stroke 0.2s ease-in-out;

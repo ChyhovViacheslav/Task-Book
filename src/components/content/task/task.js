@@ -67,7 +67,11 @@ export default function TaskList({ newTask, target, setNewTask, decTask, deleted
                                                 ref={el => refCheckbox.current[index] = el}
                                                 onChange={() => {
                                                     const changedTask = newTask.map((item) => {
-                                                        return item.id === id ? { ...item, complited: !complited } : item
+                                                        return item.id === id ? { 
+                                                            ...item, 
+                                                            complited: !complited, 
+                                                            complitedData: new Date().toLocaleDateString('en-US', {weekday: 'short'}) } 
+                                                            : item
                                                     })
                                                     countTask(++complitedTaskN)
                                                     setNewTask(changedTask)
@@ -169,7 +173,7 @@ export default function TaskList({ newTask, target, setNewTask, decTask, deleted
                                                 checked={true}
                                                 onChange={() => {
                                                     const changedTask = newTask.map((item) => {
-                                                        return item.id === id ? { ...item, complited: !complited } : item
+                                                        return item.id === id ? { ...item, complited: !complited, complitedData: '' } : item
                                                     })
                                                     countTask(--complitedTaskN)
                                                     setNewTask(changedTask)

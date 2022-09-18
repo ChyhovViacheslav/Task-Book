@@ -14,7 +14,7 @@ import { IconSelector } from '../../assets/icons/icons'
 
 export default function Content({target, setTarget, categories, changeCategories, toggleTarget}){
     const [active, setActive] = useState(false)
-    let [task, setTask] = useState('')
+    const [task, setTask] = useState('')
     const [category, setCategory] = useState('')
     const [newTask, setNewTask] = useLocalStorage('tasks', [])
     const [createdTask, incTask] = useLocalStorage('createdTask', 0)
@@ -26,12 +26,11 @@ export default function Content({target, setTarget, categories, changeCategories
         
     }, [categories.length])
 
-
-
     const addTask = (time) => {
         const id = Math.floor(Math.random() * 99999999999999)
+
         if(task.length > 49){
-            task = `${task.slice(0, 50)}...`
+            setTask(`${task.slice(0, 50)}...`)
         }
 
         const newArr = {
@@ -40,7 +39,8 @@ export default function Content({target, setTarget, categories, changeCategories
             task: task, 
             complited: false, 
             time: `${time}`, 
-            created: Date(Date.now()).slice(0, 3)}
+            created: Date(Date.now()).slice(0, 3),
+            complitedData: ''}
 
         setNewTask([...newTask, newArr])
     }
@@ -61,7 +61,7 @@ export default function Content({target, setTarget, categories, changeCategories
                             onClick={() => {
                                 setType(!type)
                             }}>
-                            <IconSelector id={type ? 'moon' : 'sun'}/>
+                            <IconSelector className='content__theme-ico' id={type ? 'moon' : 'sun'}/>
                         </button>
                         <div className='content__user'>
                             <h3>Хорошего дня, username</h3>
@@ -96,7 +96,7 @@ export default function Content({target, setTarget, categories, changeCategories
                                         return el.name
                                     })
                                     
-                                    const categoryIndex = categoryNames.findIndex(i => i == target) - 1
+                                    const categoryIndex = categoryNames.findIndex(i => i === target) - 1
 
                                     setNewTask(newTask.filter(item => {
                                         return item.category !== target

@@ -47,8 +47,15 @@
             background-color: #1b7471;
         }
     }
-    &__btn-ico{
-        font-size: 18px;
+    &__theme-ico{
+        path{
+            transition: stroke 0.2s ease-in-out;
+        }
+        &:hover{
+            path{
+                stroke: var(--main-color);
+            }
+        }
     }
     &__delete-btn{
         margin-top: 30px;

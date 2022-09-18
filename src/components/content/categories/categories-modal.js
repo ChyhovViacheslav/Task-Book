@@ -2,10 +2,9 @@ import { useContext, useRef } from 'react'
 import '../../../styles/global.scss'
 import { ThemeContext } from '../../theme/ThemeProvider'
 
-export default function CategoriesModal({currentIco, icoContent, input, active, setActive, changeInput, addCategories}){
+export default function CategoriesModal({icoBodyRef, categories, currentIco, icoContent, input, active, setActive, changeInput, addCategories}){
     const inputRef = useRef()
-    const warningRef = useRef()
-    const icoBodyRef = useRef()    
+    const warningRef = useRef()  
     const {type} = useContext(ThemeContext)
 
     const setDefault = () => {
@@ -44,9 +43,7 @@ export default function CategoriesModal({currentIco, icoContent, input, active, 
                         </div>
                         <div className='modal__ico'>
                             <p>Иконка категории:</p>
-                            <div ref={icoBodyRef} className='modal__ico-body'>
-                                {icoContent}
-                            </div>
+                            <div ref={icoBodyRef} className='modal__ico-body'>{icoContent}</div>
                         </div>
                     </div>
                     <div className='modal__btns'>
@@ -59,16 +56,23 @@ export default function CategoriesModal({currentIco, icoContent, input, active, 
                         <button
                             onClick={e => {
                                 e.preventDefault()
+
+                                const names = (el) => el.name === input
+
+                                const redBorder = () => inputRef.current.style.border = '1px solid #F05454'
                                 if(input.length === 0){
-                                    inputRef.current.style.border = '1px solid #F05454'
+                                    redBorder()
                                 }else if(currentIco === null){
-                                    icoBodyRef.current.style.border = '1px solid #F05454'
+                                    icoBodyRef.current.style.outline = '1px solid #F05454'
                                 } else if(input.length >= 12){
-                                    console.log('Слишком длинное название категории')
+                                    redBorder()
+                                } else if(categories.some(names)){
+                                    redBorder()
                                 } else {
                                     addCategories()
                                     setDefault()
                                 }
+                                
                             }} 
                             className='modal__btn-sbmt'>Добавить</button>
                     </div>

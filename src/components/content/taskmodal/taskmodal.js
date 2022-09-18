@@ -1,26 +1,31 @@
 import '../../../styles/global.scss';
-import { DateTimePicker } from '@mui/x-date-pickers';
 import { useContext, useRef, useState } from 'react';
-import { TextField } from '@mui/material';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { ThemeContext } from '../../theme/ThemeProvider';
+import { IconSelector } from '../../../assets/icons/icons';
 
 export default function TaskModal ({categories, addTask, active, setActive, setTask, setCategory, category, task, createdTask, incTask}){
-    const [value, setValue] = useState(Date.now());
+    const [value, setValue] = useState(null);
     const refInput = useRef()
     const refWarn = useRef()
+    const categoryRef = useRef()
+    const whenRef = useRef()
     const {type} = useContext(ThemeContext)
 
-    const handleChange = (newValue) => {
-        setValue(newValue)
+    const changeBorderColor = (el) => {
+        el.current.style.border = '1px solid #F05454'
     }
 
+    const defaultBorderColor = (el) => {
+        el.forEach(el => el.current.style.border = '')
+    } 
+
     const setDefault = () => {
-        refInput.current.value = ''
-        refInput.current.style.border = '1px solid rgba(40, 40, 70, 0.1)'
+        defaultBorderColor([refInput, categoryRef, whenRef])
+
         refWarn.current.style.opacity = '0'
         setActive(false)
+        setTask('')
+        refInput.current.value = ''
     }
 
     const categoriesName = categories.map((item, index) => {
@@ -31,7 +36,7 @@ export default function TaskModal ({categories, addTask, active, setActive, setT
     })
 
     return (
-        <div className={active ? 'task-modal active' : 'task-modal'} onClick={() => setDefault()}>
+        <div className={active ? 'task-modal show' : 'task-modal'} onClick={() => setDefault()}>
             <div className={type ? 'task-modal__body' : 'task-modal__body dark'} onClick={(e) => e.stopPropagation()}>
                 <form className='task-modal__form'>
                     <h4>Добавить новую задачу</h4>
@@ -41,14 +46,14 @@ export default function TaskModal ({categories, addTask, active, setActive, setT
                             <input
                                 className='task-modal__input'
                                 ref={refInput} 
-                                onChange={e =>{ 
-                                    setTask(e.target.value)
-                                    if(e.target.value.length >= 50){
-                                        e.target.style.border = '1px solid red'
+                                onChange={e =>{
+                                    if(e.target.value.length >= 50 || e.target.value.length === 0){
                                         refWarn.current.style.opacity = '1'
+                                        changeBorderColor(refInput)
                                     } else{
-                                        e.target.style.border = '1px solid rgba(40, 40, 70, 0.1)'
                                         refWarn.current.style.opacity = '0'
+                                        defaultBorderColor([refInput])
+                                        setTask(e.target.value)
                                     }
                                 }}
                                 type='text'/>
@@ -64,29 +69,20 @@ export default function TaskModal ({categories, addTask, active, setActive, setT
                                 <select 
                                     className={type ? 'task-modal__select' : 'task-modal__select dark'}
                                     defaultValue='DEF'
+                                    ref={categoryRef}
                                     onChange={(e) => {
                                         setCategory(e.target.selectedOptions[0].text)
                                         }}>
                                         <option value='DEF' hidden>Выбрать</option>
                                         {categoriesName}
                                 </select>
+                                <IconSelector className='ico' id={'chevron-down'}/>
                             </div>
                             <div className='task-modal__category-item'>
                                 <p>Когда?</p>
-                                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                    <DateTimePicker
-                                        renderInput={(params) => <TextField  className='task-modal__when-input' {...params}/>}  
-                                        onChange={handleChange} 
-                                        value={value}/>
-                                    </LocalizationProvider>
-                            </div>
-                            <div className='task-modal__category-item'>
-                                <p>Приоритет</p>
-                                <select defaultValue='DEF' className={type ? 'task-modal__select' : 'task-modal__select dark'}>
-                                    <option value='DEF' hidden>Выбрать</option>
-                                    <option value='hight'>Высокий</option>
-                                    <option value='low'>Низкий</option>
-                                </select>
+                                <input ref={whenRef} className='calendar' type='date' onChange={(e) => {
+                                    setValue(new Date(e.target.value))
+                                }}/>
                             </div>
                         </div>
                     </div>
@@ -103,12 +99,22 @@ export default function TaskModal ({categories, addTask, active, setActive, setT
                             className='task-modal__btn-sbmt'
                             onClick={(e) => {
                                 e.preventDefault()
-                                if(category !== '' && task !==''){
+
+                                if(!task || task.length >= 50){
+                                    changeBorderColor(refInput)
+                                } else if(task === ''){
+                                    changeBorderColor(refInput)
+                                    defaultBorderColor([categoryRef, whenRef])
+                                } else if(category === ''){
+                                    changeBorderColor(categoryRef)
+                                    defaultBorderColor([refInput, whenRef])
+                                } else if(value === null){
+                                    changeBorderColor(whenRef)
+                                    defaultBorderColor([refInput, categoryRef])
+                                } else{
                                     addTask(value)
                                     setDefault()
                                     incTask(++createdTask)
-                                }else{
-                                    console.log('Пустое значение')
                                 }
                             }}>
                                 Добавить
