@@ -1,10 +1,11 @@
 import '../../../styles/global.scss';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis } from 'recharts';
 import Block from '../../interface/block/block';
 
 export default function Chart({newTask}){
     const [data, setData] = useState()
+    const chartRef = useRef('')
 
     useEffect(() => {
         const currentDay = (day) => {
@@ -26,34 +27,36 @@ export default function Chart({newTask}){
             {name: 'вс', uv: (newTask.length), pv: currentDay('Sun'), amt: (newTask.length + 10)}];
 
         setData(data)
-    }, [newTask])
+    }, [newTask, chartRef.current.clientWidth])
 
     return(
         <Block className={'chart'} title={'График успеваемости'}>
-            <LineChart
-                fontFamily='Nunito'
-                fontSize='12px'
-                width={430}
-                height={170}
-                data={data}
-                margin={{
-                    top: 20,
-                    right: 0,
-                    left: -35,
-                    bottom: 0,
-                }}
-            >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Line 
-                    type="monotone" 
-                    dataKey="pv" 
-                    stroke="#29A19C" 
-                    fill='#29A19C' 
-                    dot={{strokeWidth: 5}} 
-                    activeDot={{ r: 8 }} />
-            </LineChart>
+            <div className='chart__wrapper' ref={chartRef}>
+                <LineChart
+                    fontFamily='Nunito'
+                    fontSize='12px'
+                    width={chartRef.current.clientWidth - 10}
+                    height={170}
+                    data={data}
+                    margin={{
+                        top: 20,
+                        right: 0,
+                        left: -35,
+                        bottom: 0,
+                    }}
+                >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Line 
+                        type="monotone" 
+                        dataKey="pv" 
+                        stroke="#29A19C" 
+                        fill='#29A19C' 
+                        dot={{strokeWidth: 5}} 
+                        activeDot={{ r: 8 }} />
+                </LineChart>
+            </div>
         </Block>
     )
 }

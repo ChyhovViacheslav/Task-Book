@@ -5,15 +5,18 @@ import { useState, useRef, useContext } from 'react'
 import CategoriesModal from "../categories/categories-modal"
 import { ThemeContext } from '../../theme/ThemeProvider'
 import { IconSelector } from '../../../assets/icons/icons'
+import { useWindowDimensions } from '../../services/services'
+import { Categories } from '../categories/categories'
+import CategoryAddBtn from '../../interface/buttons/categoryaddbtn'
 
-export default function Sidebar({setTarget, categories, changeCategories, toggleTarget}){
-    const [modalActive, setModalActive] = useState(false)
+export default function Sidebar({ setTarget, categories, changeCategories, toggleTarget, setModalActive, isModalActive}){
     const [currentIco, setCurrentIco] = useState(null)
     const [input, changeInput] = useState('')
     const icons = ['home', 'zap', 'briefcase', 'users']
     const ref = useRef([])
     const icoBodyRef = useRef()
     const {type} = useContext(ThemeContext)
+    const {width} = useWindowDimensions()
 
     const addCategories = () => {
         const id = Math.floor(Math.random() * 99999999999999)
@@ -41,28 +44,8 @@ export default function Sidebar({setTarget, categories, changeCategories, toggle
         )
     })
 
-    const content = categories.map((item, index) => {
-        const {id, name, icon} = item
-
-        return (
-            <div
-                key={id}
-                className={index === 0 ? "categories-item target" : "categories-item"}
-                onClick={(e) => {
-                    setTarget(e.target.textContent)
-                    toggleTarget(index)
-                }
-            }>
-                <IconSelector className={type ? 'categories-item__ico' : 'categories-item__ico dark'} id={icon}/>
-                <h3 className={type ? "categories-item__name" : "categories-item__name dark"}>
-                    {name}
-                </h3>
-            </div>
-        )
-    })
-
     return(
-        <section className='sidebar'>
+        <section className={width >= 768 ? 'sidebar' : 'sidebar actives'}>
             <div className='sidebar__container _container'>
                 <div className={type ? 'sidebar__body' : 'sidebar__body dark'}>
                     <div className='sidebar__logo'>
@@ -71,19 +54,20 @@ export default function Sidebar({setTarget, categories, changeCategories, toggle
                     </div>
                     <div className='sidebar__categories'>
                         <h2 className='sidebar__categories-title'>Категории</h2>
-                        {content}
-                        <button
-                            className='categories-item__btn' 
-                            onClick={() => {
-                                setModalActive(true)
-                            }}>
-                            <IconSelector className={'categories-item__btn-ico'} id={'plus-square'} />
-                            <h3>Добавить</h3>
-                        </button>
+                        <Categories
+                         setTarget={setTarget}
+                         categories={categories}
+                         toggleTarget={toggleTarget}
+                        />
+                        <CategoryAddBtn
+                            className={'categories-item__btn'}
+                            style={{marginTop: '30px'}}
+                            setModalActive={setModalActive}
+                            isModalActive={isModalActive}/>
                         <CategoriesModal
                             icoBodyRef={icoBodyRef}
                             input={input} 
-                            active={modalActive} 
+                            active={isModalActive} 
                             setActive={setModalActive} 
                             changeInput={changeInput}
                             addCategories={addCategories}

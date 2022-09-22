@@ -5,15 +5,18 @@ import { useState, useEffect } from 'react';
 import { useLocalStorage } from './components/services/services';
 
 import home from './assets/icons/home.svg'
+import Burger from './components/content/burger/burger';
+
 
 export default function App() {
   const [categories, changeCategories] = useLocalStorage('categories', [{id: 12314, icon: home.slice(14, -37), name: 'Дом'}])
   const [target, setTarget] = useState('')
+  const [burgerIsTogle, setBurgerTogle] = useState(false)
+  const [isModalActive, setModalActive] = useState(false)
 
   useEffect(() => {
     setTarget(categories[0].name)
-  }, [])
-  
+  }, [categories])
 
   const toggleTarget = (index) => {
     document.querySelectorAll('.categories-item').forEach((el) => {
@@ -30,14 +33,28 @@ export default function App() {
             setTarget={setTarget}
             categories={categories}
             changeCategories={changeCategories}
-            toggleTarget={toggleTarget}/>
-          <Content
             toggleTarget={toggleTarget}
+            setModalActive={setModalActive}
+            isModalActive={isModalActive}>
+          </Sidebar> 
+          <Content
             target={target}
+            toggleTarget={toggleTarget}
             setTarget={setTarget}
             categories={categories}
-            changeCategories={changeCategories}/>
+            changeCategories={changeCategories}
+            burgerIsTogle={burgerIsTogle}
+            setBurgerTogle={setBurgerTogle}/>
         </div>
+        <Burger
+          burgerIsTogle={burgerIsTogle}
+          setBurgerTogle={setBurgerTogle}
+          isModalActive={isModalActive}
+          setModalActive={setModalActive}
+          setTarget={setTarget}
+          categories={categories}
+          toggleTarget={toggleTarget}
+          target={target}/>
     </main>
   );
 }

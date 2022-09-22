@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import DotsModal from '../../interface/dots/dots'
 import Block from '../../interface/block/block';
 
-export default function ProgressBar({createdTask, deletedTask, complitedTask, incTask, decTask, countTask}){
+export default function ProgressBar({style, createdTask, deletedTask, complitedTask, incTask, decTask, countTask}){
     const [active, setActive] = useState(false)
     const isPause = useRef(false)
 
@@ -28,7 +28,8 @@ export default function ProgressBar({createdTask, deletedTask, complitedTask, in
     return(
         <Block 
             className={'progress'} 
-            title={'Ваши успехи за неделю'} 
+            title={'Ваши успехи за неделю'}
+            style={style} 
             dots={<DotsModal
                 child={'Сбросить прогресс'}
                 active={active}

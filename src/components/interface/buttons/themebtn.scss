@@ -1,0 +1,15 @@
+.themebtn{
+    display: flex;
+    align-items: center;
+    background-color: inherit;
+    &__ico{
+        path{
+            transition: stroke 0.2s ease-in-out;
+        }
+        &:hover{
+            path{
+                stroke: var(--main-color);
+            }
+        }
+    }
+}

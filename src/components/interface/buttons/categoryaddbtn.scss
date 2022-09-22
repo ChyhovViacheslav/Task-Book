@@ -1,0 +1,22 @@
+.category-btn{
+    display: flex;
+    background-color: inherit;
+    align-items: center;
+    h3{
+        margin-left: 10px;
+        color: var(--main-color);
+        transition: all 0.2s ease-in-out;
+        user-select: none;
+    }
+    &:hover{
+        h3{
+            color: #1d6e6c;
+        }
+        .category-btn__ico{          
+            path{
+                stroke: #1d6e6c;
+            }
+        }
+    }
+
+}

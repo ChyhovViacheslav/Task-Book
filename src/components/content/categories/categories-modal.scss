@@ -11,7 +11,7 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s;
-    z-index: 999;
+    z-index: 9999;
     &__body{
         padding: 20px;
         border-radius: 10px;
@@ -76,7 +76,7 @@
         padding: 8px 15px;
         border-radius: 8px;
         border: 1px solid rgba(40, 40, 70, 0.1);
-        min-width: 350px;
+        width: 240px;
         &.dark{
             background-color: var(--bg-dark);
             color: var(--text-light);
@@ -163,6 +163,18 @@
         transition: all 0.2s ease-in-out;
         &:hover{
             background-color: #1b7471;
+        }
+    }
+    @media(max-width: 510px){
+        &__inputs{
+            flex-direction: column;
+        }
+        &__ico{
+            margin-top: 20px;
+            margin-left: 0px;
+        }
+        &__btns{
+            margin-top: 20px;
         }
     }
 }

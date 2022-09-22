@@ -90,7 +90,7 @@ h5{
 ._container{
     max-width: $maxWidthContainer + px;
     margin: 0 auto;
-    
+
     @media (max-width: ($md1+px)) {
         max-width: 970px;
     }
@@ -101,7 +101,6 @@ h5{
 
     @media (max-width: ($md3+px)) {
         max-width: none;
-        padding: 0px 30px;
     }
 }
 //<КОНТЕЙНЕР>==============================================================================
@@ -120,11 +119,17 @@ h5{
 @import "../components/content/chart/chart.scss";
 @import "../components/interface/dots/dots.scss";
 @import "../components/interface/block/block.scss";
+@import "../components//content/burger/burger.scss";
+@import '../components/interface/buttons/categoryaddbtn.scss';
 //<ФАЙЛЫ СТИЛЕЙ СТРАНИЦ И ЭЛЕМЕНТОВ>================================================================================
 
 //<ОСНОВНОЙ БЛОК>================================================================================
 .page{
     display: flex;
     flex: 1 1 auto;
+    overflow: hidden;
+    &__body{
+        
+    }
 }
 //<ОСНОВНОЙ БЛОК>================================================================================

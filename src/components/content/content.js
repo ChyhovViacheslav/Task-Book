@@ -4,15 +4,16 @@ import ProgressBar from './progress/progress'
 import TaskList from './task/task'
 import { useState, useEffect, useContext } from 'react'
 import TaskModal from './taskmodal/taskmodal'
-import { useLocalStorage } from '../services/services'
+import { useLocalStorage, useWindowDimensions } from '../services/services'
 import Timer from './timer/timer'
 import Remark from './remark/remark'
 import Facts from './facts/facts'
 import Chart from './chart/chart'
 import { ThemeContext } from '../theme/ThemeProvider'
 import { IconSelector } from '../../assets/icons/icons'
+import ThemeBtn from '../interface/buttons/themebtn'
 
-export default function Content({target, setTarget, categories, changeCategories, toggleTarget}){
+export default function Content({burgerIsTogle, setBurgerTogle, target, setTarget, categories, changeCategories, toggleTarget}){
     const [active, setActive] = useState(false)
     const [task, setTask] = useState('')
     const [category, setCategory] = useState('')
@@ -20,7 +21,8 @@ export default function Content({target, setTarget, categories, changeCategories
     const [createdTask, incTask] = useLocalStorage('createdTask', 0)
     const [deletedTask, decTask] = useLocalStorage('deletedTask', 0)
     const [complitedTask, countTask] = useLocalStorage('complitedTask', 0)
-    const {type, setType} = useContext(ThemeContext)
+    const {type} = useContext(ThemeContext)
+    const {width} = useWindowDimensions()
 
     useEffect(() => {
         
@@ -56,22 +58,26 @@ export default function Content({target, setTarget, categories, changeCategories
                             <IconSelector id={'circle-plus'}/>
                             <span>Новая задача</span>
                         </button>
-                        <button 
-                            className='content__mode'
-                            onClick={() => {
-                                setType(!type)
+                        {width >= 768 ? 
+                            <>
+                                <ThemeBtn/>
+                                <div className={type ? 'content__user' : 'content__user dark'}>
+                                    <h3>Хорошего дня</h3>
+                                    <div className='content__user-ico'>
+                                        
+                                    </div>
+                                </div>
+                            </> : 
+                        <div className={burgerIsTogle ? 'content__burger animated' : 'content__burger'}
+                            onClick={() =>{
+                                setBurgerTogle(!burgerIsTogle)
                             }}>
-                            <IconSelector className='content__theme-ico' id={type ? 'moon' : 'sun'}/>
-                        </button>
-                        <div className='content__user'>
-                            <h3>Хорошего дня, username</h3>
-                            <div className='content__user-ico'>
-                                
-                            </div>
-                        </div>
+                                <span></span>
+                        </div>}
                     </div>
                    <div className='content__content'>
                         <div className='content__tasks'>
+                            {width >= 768 ? null : <Timer/>}
                             <ProgressBar
                                 complitedTask={complitedTask}
                                 newTask={newTask}
@@ -79,7 +85,8 @@ export default function Content({target, setTarget, categories, changeCategories
                                 deletedTask={deletedTask}
                                 incTask={incTask}
                                 decTask={decTask}
-                                countTask={countTask}/>
+                                countTask={countTask}
+                                style={width >= 768 ? null : {marginTop: '30px'}}/>
                             <TaskList
                                 categories={categories}
                                 complitedTaskN={complitedTask}
@@ -111,7 +118,7 @@ export default function Content({target, setTarget, categories, changeCategories
                             </button>
                         </div>
                         <div className='content__inf'>
-                            <Timer/>
+                            {width >= 768 ? <Timer/> : null}
                             <Remark
                                 newTask={newTask}/>
                             <Facts/>

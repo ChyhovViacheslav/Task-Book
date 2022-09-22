@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/static/css/main.65fed0fd.css",
+    "main.js": "/static/js/main.a5de77c8.js",
+    "static/media/trash.svg": "/static/media/trash.902dec3c8d6b9210e515.svg",
+    "static/media/calendar-white.svg": "/static/media/calendar-white.8502dac40e7f263bfc60.svg",
+    "static/media/triangle-exclamation-solid.svg": "/static/media/triangle-exclamation-solid.f6169e1be0ebc744f3d0.svg",
+    "static/media/calendar.svg": "/static/media/calendar.2418db34df1536c73e73.svg",
+    "static/media/home.svg": "/static/media/home.489c40fdd6c07232fd10720c2da0aa21.svg",
+    "index.html": "/index.html",
+    "main.65fed0fd.css.map": "/static/css/main.65fed0fd.css.map",
+    "main.a5de77c8.js.map": "/static/js/main.a5de77c8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.65fed0fd.css",
+    "static/js/main.a5de77c8.js"
+  ]
+}

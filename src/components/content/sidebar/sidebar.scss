@@ -1,12 +1,14 @@
 .sidebar{
+    opacity: 1;
     display: flex;
     box-shadow: 0px 10px 25px rgba(29, 52, 54, 0.08);
     min-height: 100vh;
+    transition: all 0.2s ease-in-out;
     &__body{
         transition: background-color 0.2s ease-in-out;
         background-color: var(--block-white);
         height: 100%;
-        width: 230px;
+        min-width: 230px;
         padding: 20px 0px 20px 20px;
         overflow: hidden;
         &.dark{
@@ -76,28 +78,6 @@
             transition: all 0.2s ease-in-out;
         }
     }
-    &__btn{
-        margin-top: 30px;
-        display: flex;
-        align-items: center;
-        background-color: inherit;
-        h3{
-            margin-left: 10px;
-            color: var(--main-color);
-            transition: all 0.2s ease-in-out;
-            user-select: none;
-        }
-        &:hover{
-            h3{
-                color: #1d6e6c;
-            }
-            .categories-item__btn-ico{          
-                path{
-                    stroke: #1d6e6c;
-                }
-            }
-        }
-    }
     &:hover{
         .categories-item__name{
             margin-left: 15px;
@@ -115,6 +95,13 @@
         border-radius: 12px 0px 0px 12px;
         transition: all 0.3s ease-in-out;
     }
+}
+
+.actives{
+    opacity: 1;
+    position: absolute;
+    left: -100%;
+    pointer-events: none;
 }
 
 .target{

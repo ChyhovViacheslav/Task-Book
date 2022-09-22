@@ -13,6 +13,10 @@
     &__item{
         font-family: 'Nunito';
         text-align: center;
+        margin-left: 10px;
+        &:nth-child(1){
+            margin-left: 0px;
+        }
     }
     &__item-count{
         display: flex;

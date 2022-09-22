@@ -1,0 +1,48 @@
+.burger{
+    position: fixed;
+    width: 100%;
+    min-height: 100%;
+    background-color: rgba(0, 0, 0, 0.507);
+    opacity: 1;
+    z-index: 999;
+    transition: all 0.3s ease-in-out;
+    left: 0;
+    &__body{
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        width: 100%;
+        padding: 80px 20px 0px 20px;
+        align-items: center;
+        display: flex;
+    }
+    &__ico{
+        width: 100%;
+        text-align: center;
+    }
+    &__categories{
+        width: 100%;
+        max-width: 470px;
+        background-color: var(--block-white);
+        border-radius: 8px;
+        padding: 10px 0px 10px 10px;
+        overflow: hidden;
+        flex: 1 0 auto;
+        transition: background-color 0.2s ease-in-out;
+        &.dark{
+            background-color: var(--block-dark);
+        }
+    }
+    &__close-btn{
+        width: 100%;
+        text-align: center;
+        font-size: 50px;
+        color: red;
+    }
+}
+
+.toggle{
+    opacity: 0;
+    pointer-events: none;
+    left: -100%;
+}

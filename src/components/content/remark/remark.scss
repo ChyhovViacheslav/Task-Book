@@ -9,4 +9,7 @@
     &__complited{
         margin-top: 10px;
     }
+    @media(max-width: ($md3 + px)){
+        margin-top: 0px;
+    }
 }

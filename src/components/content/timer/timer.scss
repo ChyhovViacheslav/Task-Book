@@ -4,6 +4,11 @@
         justify-content: space-between;
         margin-top: 20px;
     }
+    &__item{
+        p{
+            white-space: nowrap;
+        }
+    }
     &__ico{
         margin-right: 12px;
         path{
@@ -26,6 +31,26 @@
             font-size: 25px;
             line-height: 34px;
             letter-spacing: 0.02em;
+            white-space: nowrap;
+        }
+    }
+    @media(max-width: 1240px){
+        .items{
+            span{
+                font-size: 14px;
+            }
+        }
+        &__item{
+            &:nth-child(2){
+                margin-left: 10px;
+            }
+        }
+    }
+    @media(max-width: ($md3 + px)){
+        .items{
+            span{
+                font-size: 18px;
+            }
         }
     }
 }

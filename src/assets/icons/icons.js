@@ -56,7 +56,7 @@ export const IconSelector = ({id, className}) => {
             )
         case 'moon' :
             return (
-                <svg className={className} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg className={className} width="24" height="24" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g opacity="0.7">
                     <path d="M8.59255 2C5.4444 2 1.66663 5.14815 1.66663 10.1852C1.66663 15.2222 5.4444 19 10.4814 19C15.5185 19 18.6666 15.2222 18.6666 12.0741C11.7407 16.4815 4.18514 8.92593 8.59255 2Z" stroke="#282846" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </g>
