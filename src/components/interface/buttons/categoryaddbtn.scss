@@ -8,11 +8,14 @@
         transition: all 0.2s ease-in-out;
         user-select: none;
     }
+    path{
+        transition: stroke 0.3s ease-in-out;
+    }
     &:hover{
         h3{
             color: #1d6e6c;
         }
-        .category-btn__ico{          
+        .category-btn__ico{       
             path{
                 stroke: #1d6e6c;
             }

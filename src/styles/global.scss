@@ -32,9 +32,9 @@ body {
 .layout{
     background-color: var(--bg-light);
     transition: all 0.2s ease-in-out;
-}
-.layout.dark{
-    background-color: var(--bg-dark);
+    &.dark{
+        background-color: var(--bg-dark);
+    }
 }
 h1{
     font-family: 'Nunito';
@@ -128,8 +128,5 @@ h5{
     display: flex;
     flex: 1 1 auto;
     overflow: hidden;
-    &__body{
-        
-    }
 }
 //<ОСНОВНОЙ БЛОК>================================================================================

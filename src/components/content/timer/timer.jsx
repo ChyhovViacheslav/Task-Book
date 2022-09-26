@@ -2,7 +2,7 @@ import { locales } from "moment"
 import { useState, useEffect, useContext } from "react"
 import Block from "../../interface/block/block"
 import { ThemeContext } from "../../theme/ThemeProvider"
-import { IconSelector } from "../../../assets/icons/icons.js"
+import { IconSelector } from "../../../assets/icons/icons.jsx"
 
 export default function Timer(){
     const [hourse, setHourse] = useState({time: new Date()})

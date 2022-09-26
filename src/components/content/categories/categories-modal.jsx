@@ -30,6 +30,7 @@ export default function CategoriesModal({icoBodyRef, categories, currentIco, ico
                                     if(e.target.value.length >= 12){
                                         e.target.style.border = '1px solid red'
                                         warningRef.current.style.opacity = '1'
+                                        warningRef.current.textContent = 'Длинное название категории'
                                     } else{
                                         e.target.style.border = '1px solid rgba(40, 40, 70, 0.1)'
                                         warningRef.current.style.opacity = '0'
@@ -62,15 +63,22 @@ export default function CategoriesModal({icoBodyRef, categories, currentIco, ico
                                 const redBorder = () => inputRef.current.style.border = '1px solid #F05454'
                                 if(input.length === 0){
                                     redBorder()
+                                    warningRef.current.style.opacity = '1'
+                                    warningRef.current.textContent = 'Пустое значение'
                                 }else if(currentIco === null){
                                     icoBodyRef.current.style.outline = '1px solid #F05454'
                                 } else if(input.length >= 12){
                                     redBorder()
+                                    warningRef.current.textContent = 'Длинное название категории'
+                                    warningRef.current.style.opacity = '1'
                                 } else if(categories.some(names)){
                                     redBorder()
+                                    warningRef.current.textContent = 'Повтор названия категории'
+                                    warningRef.current.style.opacity = '1'
                                 } else {
                                     addCategories()
                                     setDefault()
+                                    warningRef.current.style.opacity = '0'
                                 }
                                 
                             }} 

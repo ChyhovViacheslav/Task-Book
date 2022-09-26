@@ -82,8 +82,8 @@
             margin-left: 15px;
             pointer-events: none;
             &::before{
-                content: url(../../../assets/icons/triangle-exclamation-solid.svg);
                 position: absolute;
+                content: url(../../../assets/icons/triangle-exclamation-solid.svg);
                 top: 0;
                 left: -15px;
                 height: 100%;
@@ -113,9 +113,13 @@
             right: 15px;
             top: 40px;
         }
+        .calendar{
+            pointer-events: none;
+        }
         .calendar::-webkit-calendar-picker-indicator{
             background: url('../../../assets/icons/calendar.svg') no-repeat;
             background-size: contain;
+            pointer-events: all;
             cursor: pointer;
         }
     }

@@ -3,20 +3,20 @@ import Sidebar from './components/content/sidebar/sidebar';
 import Content from './components/content/content';
 import { useState, useEffect } from 'react';
 import { useLocalStorage } from './components/services/services';
-
-import home from './assets/icons/home.svg'
 import Burger from './components/content/burger/burger';
 
-
 export default function App() {
-  const [categories, changeCategories] = useLocalStorage('categories', [{id: 12314, icon: home.slice(14, -37), name: 'Дом'}])
+  const [categories, changeCategories] = useLocalStorage('categories', [])
   const [target, setTarget] = useState('')
   const [burgerIsTogle, setBurgerTogle] = useState(false)
   const [isModalActive, setModalActive] = useState(false)
+  const [categoriesIsExists, setCategories] = useState(false)
 
   useEffect(() => {
-    setTarget(categories[0].name)
-  }, [categories])
+    if(categories.length === 1){
+      setTarget(categories[0].name)
+    }
+  }, [categories.length, categories])
 
   const toggleTarget = (index) => {
     document.querySelectorAll('.categories-item').forEach((el) => {
@@ -38,6 +38,8 @@ export default function App() {
             isModalActive={isModalActive}>
           </Sidebar> 
           <Content
+            categoriesIsExists={categoriesIsExists}
+            setCategories={setCategories}
             target={target}
             toggleTarget={toggleTarget}
             setTarget={setTarget}

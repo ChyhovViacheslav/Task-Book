@@ -1,7 +1,33 @@
 .content{
     margin-left: 70px;
     &__body{
+        position: relative;
         padding: 20px 0px;
+        .btn-warning{
+            position: absolute;
+            top: 40px;
+            color: var(--main-red);
+            font-family: 'Nunito';
+            z-index: 1;
+            left: 15px;
+            transition: top 0.3s ease-in-out;
+            &::before{
+                position: absolute;
+                content: url('../../assets/icons/triangle-exclamation-solid.svg');
+                top: 0px;
+                left: -15px;
+                height: 100%;
+                width: 10px;
+            }
+            &.show{
+                top: 70px;
+            }
+        }
+        @media(max-width: ($md3 + px)){
+            .btn-warning{
+                display: none;
+            }
+        }
     }
     &__header{
         display: flex;
@@ -77,6 +103,7 @@
         background-color: var(--main-color);
         border-radius: 8px;
         transition: all 0.2s ease-in-out;
+        z-index: 2;
         span{
             margin-left: 10px;
             font-family: 'Nunito';
